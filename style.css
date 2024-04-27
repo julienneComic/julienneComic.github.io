@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+html body {
+  height: 100%;
+}
+.header {
+      width: 80%;
+      margin: 0 auto;
+  /*     background: url("https://static.wixstatic.com/media/1b3ede_d05d851e9c0c4260aaacba4f769c5bf5~mv2.png/v1/crop/x_42,y_7,w_1731,h_1245/fill/w_981,h_705,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/JUL_toofargone.png") no-repeat center center;  */
+  /* -webkit-background-size: cover; */
+  /* -moz-background-size: cover; */
+  /* -o-background-size: cover; */
+  /* background-size: cover; */
+}
+.header-image {
+  max-width: 80vw;
+}
+.header-content {
+  position: relative;
+}
