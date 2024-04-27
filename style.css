@@ -1,22 +1,103 @@
-* {
+html, body, h1, h2, h3, div, button, p {
   margin: 0;
-  padding: 0;
+  font-family: roboto;
+  font-weight: 50;
 }
-html body {
-  height: 100%;
+@viewport {
+  width: device-width;
 }
-.header {
-      width: 80%;
-      margin: 0 auto;
-  /*     background: url("https://static.wixstatic.com/media/1b3ede_d05d851e9c0c4260aaacba4f769c5bf5~mv2.png/v1/crop/x_42,y_7,w_1731,h_1245/fill/w_981,h_705,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/JUL_toofargone.png") no-repeat center center;  */
-  /* -webkit-background-size: cover; */
-  /* -moz-background-size: cover; */
-  /* -o-background-size: cover; */
-  /* background-size: cover; */
+nav {
+  display: none
 }
-.header-image {
-  max-width: 80vw;
+.header-container {
+  max-width: 981px;
+  background-image: url('https://static.wixstatic.com/media/1b3ede_d05d851e9c0c4260aaacba4f769c5bf5~mv2.png/v1/crop/x_42,y_7,w_1731,h_1245/fill/w_981,h_705,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/JUL_toofargone.png');
+  margin: 0 auto;
+  overflow: auto;
 }
-.header-content {
-  position: relative;
+.update-blurb {
+  text-align: right;
+  color: rgb(37, 49, 141);
+  padding: 3% 6%;
+  font-size: 2rem;
+  margin: 0;
 }
+.site-title {
+  text-align: center;
+  font-size: 4rem;
+  margin-top: 300px;
+}
+.site-sub-title {
+  text-align: center;
+  font-size: 1.5rem;
+}
+#nav-bar {
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+  margin: 64px auto;
+}
+.open-nav-button {
+  display: none;
+}
+.close-button {
+  display: none;
+}
+@media all and (min-width: 890px) {
+  #nav-bar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(256,256,256);
+    background-color: rgba(256,256,256, 0.9);
+    overflow-x: hidden;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  #nav-bar.open {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+  #nav-bar.transition {
+    transition: 0.5s ease-out;
+  }
+  .open-nav-button {
+    display: block;
+    font-size: 96px;
+    background-color: transparent;
+    border: none;
+    margin-left: auto;
+  }
+  .close-button {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    z-index: inherit;
+  }
+}
+.nav-button {
+  padding: 1rem 1.5rem;
+  opacity: 75%;
+  background-color: white;
+  font-size: 1.25rem;
+  transition: 0.3s;
+  color: rgb(64, 77, 174);
+}
+
+.nav-button:hover {
+  background-color:rgb(64, 77, 174);
+  opacity: 100%;
+  color: white;
+}
+/*
+.social-links
+.email
+
+.copywrite
+*/

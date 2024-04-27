@@ -1,64 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HTML 5 Boilerplate</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <header class='header'>
-      <div class='header-content'>
-        <h1>Julienne</h1>
-        <h2>a graphic novel</h2>
-        <nav>
-          <ul>
-            <li>
-              <a href='#latest'>Latest</a>
-            </li>
-            <li>
-              <a href='#beginning'>Start From the Beginning</a></li>
-            <li>
-              <a href='#about'>About</a></li>
-            <li>
-              <a href='#cast'>Cast</a></li>
-            <li>
-              <a href='#archive'>Archive</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <img class='header-image' src="https://static.wixstatic.com/media/1b3ede_d05d851e9c0c4260aaacba4f769c5bf5~mv2.png/v1/crop/x_42,y_7,w_1731,h_1245/fill/w_981,h_705,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/JUL_toofargone.png"/>
-    </header>
-    <section>
-      <h3>Page Title</h3>
-      <img />
-      <nav>
-        <ul>
-          <li>
-            <a href='prevous'>Previous</a>
-          </li>
-          <li>
-            <a href='next'>Next</a>
-          </li>
-        </ul>
-      </nav>
-    </section>
-    <footer>
-      <div>
-        <p class='copyright'>Art and Story © Sara Nutter 2023</p>
-        <nav>
-          <ul>
-            <li><a><img/></a></li>
-            <li><a><img/></a></li>
-            <li><a><img/></a></li>
-            <li><a><img/></a></li>
-          </ul>
-        </nav>
-      </div>
-      <div class='email widget'></div>
-    </footer>
-	<script src="index.js"></script>
-  </body>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  <link rel="stylesheet" href="style.css">
+</head>
+<script>
+  let navBar;
+
+  function openNav() {
+    navBar ??= document.getElementById("nav-bar");
+    navBar.classList.add('open');
+    navBar.classList.add('transition');
+  }
+
+  function closeNav() {
+    navBar ??= document.getElementById("nav-bar");
+    navBar.classList.remove('open');
+  }
+
+  document.addEventListener("keyup", function pressEscape(event) {
+    if (event.keyCode = "27") {
+      closeNav()
+    }
+  })
+
+</script>
+
+<body>
+  <header class="header-container">
+    <h2 class="update-blurb">Updates Fridays</h2>
+    <h1 class="site-title">JULIENNE</h1>
+    <h2 class="site-sub-title">a graphic novel</h2>
+    <button class="open-nav-button" onclick="openNav()">☰</button>
+    <nav id="nav-bar">
+      <button class="close-button" onclick="closeNav()">x</button>
+      <a class="nav-button">LATEST</a>
+      <a class="nav-button">START FROM THE BEGINNING</a>
+      <a class="nav-button">ABOUT</a>
+      <a class="nav-button">CAST</a>
+      <a class="nav-button">ARCHIVE</a>
+    </nav>
+  </header>
+  <content>content</content>
+  <footer>
+    <nav class="social-links">
+      <a href="https://www.instagram.com/sara_the_dragonfly/">
+        <img
+          src="https://static.wixstatic.com/media/81af6121f84c41a5b4391d7d37fce12a.png/v1/fill/w_84,h_84,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/81af6121f84c41a5b4391d7d37fce12a.png" />
+      </a>
+      <a href="https://twitter.com/snutterbutter">
+        <img
+          src="https://static.wixstatic.com/media/01ab6619093f45388d66736ec22e5885.png/v1/fill/w_84,h_84,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/01ab6619093f45388d66736ec22e5885.png" />
+      </a>
+      <a href="http://ko-fi.com/snutter">
+        <img
+          src="https://static.wixstatic.com/media/1b3ede_dab30613b6a844bb9b323c06b20791d7~mv2.png/v1/fill/w_84,h_84,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/1b3ede_dab30613b6a844bb9b323c06b20791d7~mv2.png" />
+      </a>
+      <a href="http://patreon.com/snutter">
+        <img
+          src="https://static.wixstatic.com/media/1b3ede_3c3a61437d1746e289a2e94c53ebff51~mv2.png/v1/fill/w_84,h_84,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/1b3ede_3c3a61437d1746e289a2e94c53ebff51~mv2.png" />
+      </a>
+    </nav>
+    <h2 class="email">Sign up for email notifications!</h2>
+    <h3 class="email">Receive an email when the comic updates.</h3>
+
+    <p class="copywrite">Art and Story © Sara Nutter 2023</p>
+  </footer>
+</body>
+
 </html>
