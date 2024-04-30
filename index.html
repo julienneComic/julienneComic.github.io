@@ -27,6 +27,74 @@
     }
   })
 
+  const alreadyHasQueryString = window.location.href.includes('?');
+  const findQueryString = (targetString) => {
+    const queryString = window.location.search;
+    const valueStartsIndex = queryString.indexOf(targetString + '=') + targetString.length + 1;
+    if (valueStartsIndex < targetString.length + 1) return;
+    const queryStringStartingAtValue = queryString.slice(valueStartsIndex, queryString.length);
+    const valueEndsIndex = queryStringStartingAtValue.indexOf('&');
+    return [valueStartsIndex, valueEndsIndex > 0 ? valueEndsIndex + valueStartsIndex : queryString.length];
+  }
+  const getSearchWithModifiedValue = (targetString, value) => {
+    const [ valueStart, valueEnd ] = findQueryString(targetString);
+    const search = window.location.search;
+    return (
+      search.slice(0, valueStart) +
+        value +
+        search.slice(valueEnd, search.length) 
+    )
+  }
+  const findQueryValue = (targetString) => {
+    const [ valueStart, valueEnd ] = findQueryString(targetString);
+    return window.location.search.slice(valueStart, valueEnd);
+  }
+
+  let page = findQueryValue('page');
+  if (!page) {
+    page = 1;
+    window.location.href += (alreadyHasQueryString ? '&' : '?') + 'page=1';
+  }
+  const setPageViewData = async (page) => {
+    const response = await fetch(`./pages/page_${page}.json`);
+    const pageData = await response.json();
+    document.getElementById("page-image").src = pageData.image;
+    if (pageData.text) {
+      const descriptionElement = document.createElement('p');
+      descriptionElement.textContent = pageData.text;
+      descriptionElement.classList.add('description');
+      document.getElomentByTagName("page-image")[0].insertAdjacentElement('afterend', descriptionElement);
+    }
+    if (page < 1) {
+      document.getElementById('first-page').disabled = true;
+      document.getElementById('previous-page').disabled = true;
+    } else {
+      document.getElementById('first-page').disabled = false;
+      document.getElementById('previous-page').disabled = false;
+    }
+    document.getElementById('first-page').addEventListener('click', () => {
+      window.location.search = getSearchWithModifiedValue('page', 1);
+    })
+    document.getElementById('previous-page').addEventListener('click', () => {
+      window.location.search = getSearchWithModifiedValue('page', Number(page) - 1);
+    })
+    document.getElementById('next-page').addEventListener('click', () => {
+      window.location.search = getSearchWithModifiedValue('page', Number(page) + 1);
+    })
+    document.getElementById('last-page').addEventListener('click', () => {
+      window.location.search = getSearchWithModifiedValue('page', 1);
+    })
+    document.getElementById('page-number').textContent = page;
+  };
+  setPageViewData(page);
+  const changePage = (page) => {
+
+  }
+  const view = findQueryValue('view');
+  if (!view) {
+    window.location.href += (alreadyHasQueryString ? '&' : '?') + 'view=page';
+  }
+  
 </script>
 
 <body>
@@ -38,7 +106,7 @@
     <nav id="nav-bar">
       <ul>
         <li><button class="close-button" onclick="closeNav()">&#x2715;</button></li>
-        <li><a class="nav-button">LATEST</a></li>
+        <li><a src='#latest'class="nav-button">LATEST</a></li>
         <li><a class="nav-button">START FROM THE BEGINNING</a></li>
         <li><a class="nav-button">ABOUT</a></li>
         <li><a class="nav-button">CAST</a></li>
@@ -47,13 +115,13 @@
     </nav>
   </header>
   <content>
-    <img src="./assets/chapter one.webp"/>
+    <img id="page-image" src=""/>
     <div>
-        <a href="first"><<</a>
-      <a href="prev"><</a>
-      <p>1</p>
-      <a href="next">></a>
-      <a href="last">>></a>
+      <button id="first-page"><<</button>
+      <button id="previous-page"><</button>
+      <p id="page-number"></p>
+      <button id="next-page">></button>
+      <button id="last-page">>></button>
     </div>
   </content>
   <footer>
@@ -62,25 +130,25 @@
         <li>
           <a href="https://www.instagram.com/sara_the_dragonfly/">
             <img class="social-icon"
-              src="https://static.wixstatic.com/media/81af6121f84c41a5b4391d7d37fce12a.png/v1/fill/w_84,h_84,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/81af6121f84c41a5b4391d7d37fce12a.png" />
+              src="./assets/instagram logo.png" />
           </a>
         </li>
         <li>
           <a href="https://twitter.com/snutterbutter">
             <img class="social-icon"
-              src="https://static.wixstatic.com/media/01ab6619093f45388d66736ec22e5885.png/v1/fill/w_84,h_84,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/01ab6619093f45388d66736ec22e5885.png" />
+              src="./assets/twitter logo.webp" />
           </a>
         </li>
         <li>
           <a href="http://ko-fi.com/snutter">
             <img class="social-icon"
-              src="https://static.wixstatic.com/media/1b3ede_dab30613b6a844bb9b323c06b20791d7~mv2.png/v1/fill/w_84,h_84,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/1b3ede_dab30613b6a844bb9b323c06b20791d7~mv2.png" />
+              src="./assets/kofi logo.webp" />
           </a> 
         </li>
         <li>
           <a href="http://patreon.com/snutter">
             <img class="social-icon"
-              src="https://static.wixstatic.com/media/1b3ede_3c3a61437d1746e289a2e94c53ebff51~mv2.png/v1/fill/w_84,h_84,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/1b3ede_3c3a61437d1746e289a2e94c53ebff51~mv2.png" />
+              src="./assets/patreon logo.webp" />
           </a>
         </li>
       </ul>

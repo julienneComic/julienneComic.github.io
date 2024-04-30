@@ -2,6 +2,7 @@ html, body, h1, h2, h3, div, button, p {
   margin: 0;
   font-family: roboto;
   font-weight: 50;
+  border: none;
 }
 @viewport {
   width: device-width;
@@ -11,7 +12,7 @@ ul li {
 }
 .header-container {
   max-width: 981px;
-  background-image: url('https://static.wixstatic.com/media/1b3ede_d05d851e9c0c4260aaacba4f769c5bf5~mv2.png/v1/crop/x_42,y_7,w_1731,h_1245/fill/w_981,h_705,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/JUL_toofargone.png');
+  background-image: url('./assets/header.webp');
   margin: 0 auto;
   overflow: auto;
 }
@@ -117,16 +118,32 @@ content img {
   width: 80%;
   display: block;
 }
+
+@media all and (max-width: 890px) {
+  content img {
+    padding: 20px 5px;
+    width: 95%;
+  }
+}
 content div {
   display: flex;
   margin: 0 auto;
   margin-bottom: 40px;
-  width: 30%;
+  width: 300px;
   justify-content: space-around;
 }
 content div a { 
     text-decoration: none;
     color: black;
+}
+content button {
+  cursor: pointer;
+  background-color: white;
+  font-size: 24px;
+  border-radius: 10px;
+}
+content button:hover {
+  background-color: rgb(37, 49, 141);
 }
 .nav-button:hover {
   background-color:rgb(64, 77, 174);
