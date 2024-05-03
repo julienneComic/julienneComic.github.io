@@ -1,164 +1,190 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-  <link rel="stylesheet" href="style.css">
-</head>
-<script>
-  let navBar;
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <script>
+    let navBar;
+    const d = document;
+    const w = window;
 
-  function openNav() {
-    navBar ??= document.getElementById("nav-bar");
-    navBar.classList.add('open');
-    navBar.classList.add('transition');
-  }
-
-  function closeNav() {
-    navBar ??= document.getElementById("nav-bar");
-    navBar.classList.remove('open');
-  }
-
-  document.addEventListener("keyup", function pressEscape(event) {
-    if (event.keyCode = "27") {
-      closeNav()
+    function openNav() {
+      navBar ??= d.getElementById("nav-bar");
+      navBar.classList.add("open");
+      navBar.classList.add("transition");
     }
-  })
 
-  const alreadyHasQueryString = window.location.href.includes('?');
-  const findQueryString = (targetString) => {
-    const queryString = window.location.search;
-    const valueStartsIndex = queryString.indexOf(targetString + '=') + targetString.length + 1;
-    if (valueStartsIndex < targetString.length + 1) return;
-    const queryStringStartingAtValue = queryString.slice(valueStartsIndex, queryString.length);
-    const valueEndsIndex = queryStringStartingAtValue.indexOf('&');
-    return [valueStartsIndex, valueEndsIndex > 0 ? valueEndsIndex + valueStartsIndex : queryString.length];
-  }
-  const getSearchWithModifiedValue = (targetString, value) => {
-    const [ valueStart, valueEnd ] = findQueryString(targetString);
-    const search = window.location.search;
-    return (
-      search.slice(0, valueStart) +
-        value +
-        search.slice(valueEnd, search.length) 
-    )
-  }
-  const findQueryValue = (targetString) => {
-    const [ valueStart, valueEnd ] = findQueryString(targetString);
-    return window.location.search.slice(valueStart, valueEnd);
-  }
-
-  let page = findQueryValue('page');
-  if (!page) {
-    page = 1;
-    window.location.href += (alreadyHasQueryString ? '&' : '?') + 'page=1';
-  }
-  const setPageViewData = async (page) => {
-    const response = await fetch(`./pages/page_${page}.json`);
-    const pageData = await response.json();
-    document.getElementById("page-image").src = pageData.image;
-    if (pageData.text) {
-      const descriptionElement = document.createElement('p');
-      descriptionElement.textContent = pageData.text;
-      descriptionElement.classList.add('description');
-      document.getElomentByTagName("page-image")[0].insertAdjacentElement('afterend', descriptionElement);
+    function closeNav() {
+      navBar ??= d.getElementById("nav-bar");
+      navBar.classList.remove("open");
     }
-    if (page < 1) {
-      document.getElementById('first-page').disabled = true;
-      document.getElementById('previous-page').disabled = true;
-    } else {
-      document.getElementById('first-page').disabled = false;
-      document.getElementById('previous-page').disabled = false;
+
+    d.addEventListener("keyup", function pressEscape(event) {
+      if ((event.keyCode = "27")) {
+        closeNav();
+      }
+    });
+    const getQueryValue = (query) => {
+      const url = new URL(location);
+      return url.searchParams.get(query);
+    };
+    const setQueryValue = (query, value) => {
+      const url = new URL(location);
+      url.searchParams.set(query, value);
+      history.pushState({}, "", url);
+    };
+    // const alreadyHasQueryString = w.location.href.includes("?");
+    // const findQueryString = (targetString) => {
+    //   const queryString = w.location.search;
+    //   const valueStartsIndex =
+    //     queryString.indexOf(targetString + "=") + targetString.length + 1;
+    //   if (valueStartsIndex < targetString.length + 1) return;
+    //   const queryStringStartingAtValue = queryString.slice(
+    //     valueStartsIndex,
+    //     queryString.length,
+    //   );
+    //   const valueEndsIndex = queryStringStartingAtValue.indexOf("&");
+    //   return [
+    //     valueStartsIndex,
+    //     valueEndsIndex > 0
+    //       ? valueEndsIndex + valueStartsIndex
+    //       : queryString.length,
+    //   ];
+    // };
+    // const getSearchWithModifiedValue = (targetString, value) => {
+    //   const [valueStart, valueEnd] = findQueryString(targetString) || [];
+    //   if (!valueStart || !valueEnd) return;
+    //   const search = w.location.search;
+    //   return (
+    //     search.slice(0, valueStart) +
+    //     value +
+    //     search.slice(valueEnd, search.length)
+    //   );
+    // };
+    // const findQueryValue = (targetString) => {
+    //   const [valueStart, valueEnd] = findQueryString(targetString) || [];
+    //   if (!valueStart || !valueEnd) return;
+    //   return w.location.search.slice(valueStart, valueEnd);
+    // };
+
+    let page = getQueryValue("page");
+    if (!page) {
+      page = 1;
+      setQueryValue("page", 1);
     }
-    document.getElementById('first-page').addEventListener('click', () => {
-      window.location.search = getSearchWithModifiedValue('page', 1);
-    })
-    document.getElementById('previous-page').addEventListener('click', () => {
-      window.location.search = getSearchWithModifiedValue('page', Number(page) - 1);
-    })
-    document.getElementById('next-page').addEventListener('click', () => {
-      window.location.search = getSearchWithModifiedValue('page', Number(page) + 1);
-    })
-    document.getElementById('last-page').addEventListener('click', () => {
-      window.location.search = getSearchWithModifiedValue('page', 1);
-    })
-    document.getElementById('page-number').textContent = page;
-  };
-  setPageViewData(page);
-  const changePage = (page) => {
+    const setPageViewData = async (page) => {
+      const response = await fetch(`./pages/page_${page}.json`);
+      const pageData = await response.json();
+      d.getElementById("page-image").src = pageData.image;
+      if (pageData.text) {
+        const descriptionElement = d.createElement("p");
+        descriptionElement.textContent = pageData.text;
+        descriptionElement.classList.add("description");
+        d.getElomentByTagName("page-image")[0].insertAdjacentElement(
+          "afterend",
+          descriptionElement,
+        );
+      }
+      if (page < 1) {
+        d.getElementById("first-page").disabled = true;
+        d.getElementById("previous-page").disabled = true;
+      } else {
+        d.getElementById("first-page").disabled = false;
+        d.getElementById("previous-page").disabled = false;
+      }
+      d.getElementById("first-page").addEventListener("click", () => {
+        setQueryValue("page", 1);
+      });
+      d.getElementById("previous-page").addEventListener("click", () => {
+        const newPage = Number(page) - 1;
+        setQueryValue("page", newPage);
+        setPageViewData(newPage);
+      });
+      d.getElementById("next-page").addEventListener("click", () => {
+        const newPage = Number(page + 1);
+        setQueryValue("page", newPage);
+      });
+      d.getElementById("last-page").addEventListener("click", () => {
+        setQueryValue("page", 1);
+      });
+      d.getElementById("page-number").textContent = page;
+    };
 
-  }
-  const view = findQueryValue('view');
-  if (!view) {
-    window.location.href += (alreadyHasQueryString ? '&' : '?') + 'view=page';
-  }
-  
-</script>
+    setPageViewData(page);
 
-<body>
-  <header class="header-container">
-    <h2 class="update-blurb">Updates Fridays</h2>
-    <h1 class="site-title">JULIENNE</h1>
-    <h2 class="site-sub-title">a graphic novel</h2>
-    <button class="open-nav-button" onclick="openNav()">☰</button>
-    <nav id="nav-bar">
-      <ul>
-        <li><button class="close-button" onclick="closeNav()">&#x2715;</button></li>
-        <li><a src='#latest'class="nav-button">LATEST</a></li>
-        <li><a class="nav-button">START FROM THE BEGINNING</a></li>
-        <li><a class="nav-button">ABOUT</a></li>
-        <li><a class="nav-button">CAST</a></li>
-        <li><a class="nav-button">ARCHIVE</a></li>
-      </ul>
-    </nav>
-  </header>
-  <content>
-    <img id="page-image" src=""/>
-    <div>
-      <button id="first-page"><<</button>
-      <button id="previous-page"><</button>
-      <p id="page-number"></p>
-      <button id="next-page">></button>
-      <button id="last-page">>></button>
-    </div>
-  </content>
-  <footer>
-    <nav class="social-links">
-      <ul>
-        <li>
-          <a href="https://www.instagram.com/sara_the_dragonfly/">
-            <img class="social-icon"
-              src="./assets/instagram logo.png" />
-          </a>
-        </li>
-        <li>
-          <a href="https://twitter.com/snutterbutter">
-            <img class="social-icon"
-              src="./assets/twitter logo.webp" />
-          </a>
-        </li>
-        <li>
-          <a href="http://ko-fi.com/snutter">
-            <img class="social-icon"
-              src="./assets/kofi logo.webp" />
-          </a> 
-        </li>
-        <li>
-          <a href="http://patreon.com/snutter">
-            <img class="social-icon"
-              src="./assets/patreon logo.webp" />
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <div class="email">
-      <h2>Sign up for email notifications!</h2>
-      <h3>Receive an email when the comic updates.</h3>
-    </div>
-    <p class="copywrite">Art and Story © Sara Nutter 2023</p>
-  </footer>
-</body>
+    const changePage = (page) => {};
+    const view = getQueryValue("view");
+    if (!view) {
+      setQueryValue("view", "page");
+    }
+  </script>
 
+  <body>
+    <header class="header-container">
+      <h2 class="update-blurb">Updates Fridays</h2>
+      <h1 class="site-title">JULIENNE</h1>
+      <h2 class="site-sub-title">a graphic novel</h2>
+      <button class="open-nav-button" onclick="openNav()">☰</button>
+      <nav id="nav-bar">
+        <ul>
+          <li>
+            <button class="close-button" onclick="closeNav()">&#x2715;</button>
+          </li>
+          <li><a src="#latest" class="nav-button">LATEST</a></li>
+          <li><a class="nav-button">START FROM THE BEGINNING</a></li>
+          <li><a class="nav-button">ABOUT</a></li>
+          <li><a class="nav-button">CAST</a></li>
+          <li><a class="nav-button">ARCHIVE</a></li>
+        </ul>
+      </nav>
+    </header>
+    <content>
+      <img id="page-image" src="" />
+      <div>
+        <button id="first-page"><<</button>
+        <button id="previous-page"><</button>
+        <p id="page-number"></p>
+        <button id="next-page">></button>
+        <button id="last-page">>></button>
+      </div>
+    </content>
+    <footer>
+      <nav class="social-links">
+        <ul>
+          <li>
+            <a href="https://www.instagram.com/sara_the_dragonfly/">
+              <img class="social-icon" src="./assets/instagram logo.png" />
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/snutterbutter">
+              <img class="social-icon" src="./assets/twitter logo.webp" />
+            </a>
+          </li>
+          <li>
+            <a href="http://ko-fi.com/snutter">
+              <img class="social-icon" src="./assets/kofi logo.webp" />
+            </a>
+          </li>
+          <li>
+            <a href="http://patreon.com/snutter">
+              <img class="social-icon" src="./assets/patreon logo.webp" />
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="email">
+        <h2>Sign up for email notifications!</h2>
+        <h3>Receive an email when the comic updates.</h3>
+      </div>
+      <p class="copywrite">Art and Story © Sara Nutter 2023</p>
+    </footer>
+  </body>
 </html>
