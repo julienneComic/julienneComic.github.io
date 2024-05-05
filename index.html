@@ -71,6 +71,7 @@
     }
 
     head.appendChild(js);
+    console.log("base script finished");
   </script>
 
   <body>
@@ -85,28 +86,22 @@
           <li>
             <button class="close-button" onclick="closeNav()">&#x2715;</button>
           </li>
-          <li><a src="./?view=pages&page=93" class="nav-button">LATEST</a></li>
+          <li><a href="./?view=pages&page=93" class="nav-button">LATEST</a></li>
           <li>
-            <a src="./?view=page&page=1" class="nav-button"
+            <a href="./?view=page&page=1" class="nav-button"
               >START FROM THE BEGINNING</a
             >
           </li>
-          <li><a src="./?view=about" class="nav-button">ABOUT</a></li>
-          <li><a src="./?view=cast" class="nav-button">CAST</a></li>
-          <li><a src="./?view=archive" class="nav-button">ARCHIVE</a></li>
+          <li><a href="./?view=about" class="nav-button">ABOUT</a></li>
+          <li><a href="./?view=cast" class="nav-button">CAST</a></li>
+          <li><a href="./?view=archive" class="nav-button">ARCHIVE</a></li>
         </ul>
       </nav>
     </header>
-    <content>
-      <img id="page-image" src="" />
-      <div>
-        <a id="first-page" href="./?view=page&page=1"><<</a>
-        <a id="previous-page" href="./?view=page&page=2"><</a>
-        <p id="page-number"></p>
-        <a id="next-page" href="./?view=page&page=3">></a>
-        <a id="last-page" href="./?view=page&page=93">>></a>
-      </div>
-    </content>
+    <page-component></page-component>
+    <cast-component></cast-component>
+    <archive-component></archive-component>
+    <about-component></about-component>
     <footer>
       <nav class="social-links">
         <ul>

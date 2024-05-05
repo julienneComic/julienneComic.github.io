@@ -1,0 +1,10 @@
+notes
+https://geshan.com.np/blog/2021/10/nodejs-sqlite/
+https://www.sqlite.org/lang_createtable.html
+https://www.sqlitetutorial.net/sqlite-create-table/
+https://sqlime.org/
+https://geshan.com.np/blog/2021/10/nodejs-sqlite/
+https://expressjs.com/en/guide/error-handling.html#error-handling
+https://robkendal.co.uk/blog/how-to-build-a-restful-node-js-api-server-using-json-files/
+questrial
+syne

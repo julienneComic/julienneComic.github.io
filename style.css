@@ -117,54 +117,6 @@ ul li {
   color: rgb(64, 77, 174);
   text-wrap: nowrap;
 }
-content {
-  max-width: 980px;
-  display: block;
-  width: 100%;
-  margin: 0 auto;
-  font-size: 24px;
-}
-content img {
-  padding: 20px;
-  margin: 20px auto;
-  width: 80%;
-  display: block;
-  transition: height ease 250ms;
-}
-
-@media all and (max-width: 890px) {
-  content img {
-    padding: 20px 5px;
-    width: 95%;
-  }
-}
-content div {
-  display: flex;
-  margin: 0 auto;
-  margin-bottom: 40px;
-  width: 300px;
-  justify-content: space-around;
-}
-content div a { 
-    text-decoration: none;
-    color: black;
-}
-content a {
-  cursor: pointer;
-  background-color: white;
-  font-size: 24px;
-  border-radius: 10px;
-  transition: color 250ms ease, background-color 250ms ease;
-}
-content a:hover {
-  background-color: rgb(37, 49, 141);
-  color: white;
-}
-content a:disabled {
-  background-color: lightgrey;
-  cursor: unset;
-  color: white;
-}
 .nav-button:hover {
   background-color:rgb(64, 77, 174);
   opacity: 100%;
