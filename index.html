@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="style.css" />
     <title>Julienne the graphic novel's home on the internet</title>
   </head>
-  <script src="./src/components/page/index.js"></script>
   <script>
     let navBar;
     const d = document;
@@ -48,19 +47,30 @@
       history.pushState({}, "", url);
     };
 
-    let page = getQueryValue("page");
-    if (!page) {
-      page = 1;
-      setQueryValue("page", 1);
-    }
-
-    setPageViewData(page);
-
-    const changePage = (page) => {};
     const view = getQueryValue("view");
     if (!view) {
       setQueryValue("view", "page");
     }
+    const head = document.getElementsByTagName("head")[0];
+    const js = document.createElement("script");
+
+    js.type = "text/javascript";
+    switch (view) {
+      case "page":
+        js.src = "./src/components/page/index.js";
+        break;
+      case "archive":
+        js.src = "./src/components/archive/index.js";
+        break;
+      case "about":
+        js.src = "./src/components/about/index.js";
+        break;
+      case "cast":
+        js.src = "./src/components/cast/index.js";
+        break;
+    }
+
+    head.appendChild(js);
   </script>
 
   <body>
@@ -75,22 +85,26 @@
           <li>
             <button class="close-button" onclick="closeNav()">&#x2715;</button>
           </li>
-          <li><a src="#latest" class="nav-button">LATEST</a></li>
-          <li><a class="nav-button">START FROM THE BEGINNING</a></li>
-          <li><a class="nav-button">ABOUT</a></li>
-          <li><a class="nav-button">CAST</a></li>
-          <li><a class="nav-button">ARCHIVE</a></li>
+          <li><a src="./?view=pages&page=93" class="nav-button">LATEST</a></li>
+          <li>
+            <a src="./?view=page&page=1" class="nav-button"
+              >START FROM THE BEGINNING</a
+            >
+          </li>
+          <li><a src="./?view=about" class="nav-button">ABOUT</a></li>
+          <li><a src="./?view=cast" class="nav-button">CAST</a></li>
+          <li><a src="./?view=archive" class="nav-button">ARCHIVE</a></li>
         </ul>
       </nav>
     </header>
     <content>
       <img id="page-image" src="" />
       <div>
-        <button id="first-page"><<</button>
-        <button id="previous-page"><</button>
+        <a id="first-page" href="./?view=page&page=1"><<</a>
+        <a id="previous-page" href="./?view=page&page=2"><</a>
         <p id="page-number"></p>
-        <button id="next-page">></button>
-        <button id="last-page">>></button>
+        <a id="next-page" href="./?view=page&page=3">></a>
+        <a id="last-page" href="./?view=page&page=93">>></a>
       </div>
     </content>
     <footer>

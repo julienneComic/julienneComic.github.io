@@ -1,15 +1,3 @@
-const d = document;
-const w = window;
-
-const getQueryValue = (query) => {
-  const url = new URL(location);
-  return url.searchParams.get(query);
-};
-const setQueryValue = (query, value) => {
-  const url = new URL(location);
-  url.searchParams.set(query, value);
-  history.pushState({}, "", url);
-};
 const setButtonsDisabled = (disabled) => {
   const firstPage = d.getElementById("first-page");
   if (firstPage) {
@@ -65,7 +53,7 @@ const handlePageCleanup = () => {
     );
   }
 };
-const setupPageView = async (newPage) => {
+const setupPageView = async (page) => {
   d.getElementById("loading")?.classList.add("loading");
   setButtonsDisabled(true);
   handlePageCleanup();
@@ -73,7 +61,6 @@ const setupPageView = async (newPage) => {
   if (image) {
     image.src = "";
   }
-  page = newPage;
   const response = await fetch(`./pages/page_${page}.json`);
   const pageData = await response.json();
   setButtonsDisabled(false);
@@ -95,24 +82,17 @@ const setupPageView = async (newPage) => {
     d.getElementById("first-page").disabled = false;
     d.getElementById("previous-page").disabled = false;
   }
-  //remove these event listeners!
-  d.getElementById("first-page").addEventListener(
-    "click",
-    handleFirstPageClick,
-  );
-  d.getElementById("previous-page").addEventListener(
-    "click",
-    handlePreviousPageClick,
-  );
-  d.getElementById("next-page").addEventListener("click", handleNextPageClick);
-  d.getElementById("last-page").addEventListener("click", handleFirstPageClick);
+  console.log(page);
+  d.getElementById("previous-page").href =
+    `./?view=page&page=${Number(page) - 1}`;
+  d.getElementById("next-page").href = `./?view=page&page=${Number(page) + 1}`;
   d.getElementById("page-number").textContent = page;
 };
-setupPageView(getQueryValue("page"));
 
-window.addEventListener("locationchange", function (event) {
-  console.log("location changed!,", event);
-});
-window.onhashchange = (event) => {
-  console.log("stuff", event);
-};
+let page = getQueryValue("page");
+if (!page) {
+  page = 1;
+  setQueryValue("page", 1);
+}
+
+setupPageView(page);

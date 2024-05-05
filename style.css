@@ -149,18 +149,18 @@ content div a {
     text-decoration: none;
     color: black;
 }
-content button {
+content a {
   cursor: pointer;
   background-color: white;
   font-size: 24px;
   border-radius: 10px;
   transition: color 250ms ease, background-color 250ms ease;
 }
-content button:hover {
+content a:hover {
   background-color: rgb(37, 49, 141);
   color: white;
 }
-content button:disabled {
+content a:disabled {
   background-color: lightgrey;
   cursor: unset;
   color: white;
