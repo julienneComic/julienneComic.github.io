@@ -1,3 +1,12 @@
+/* latin */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url(./assets/roboto.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 html, body, h1, h2, h3, div, button, p {
   margin: 0;
   font-family: roboto;
@@ -12,9 +21,12 @@ ul li {
 }
 .header-container {
   max-width: 981px;
-  background-image: url('./assets/header.webp');
+  background-image: url('./assets/header_25_percent.webp');
   margin: 0 auto;
   overflow: auto;
+}
+@media all and (max-width: 400px) {
+  background-image: url('./assets/header_50_percent.webp');
 }
 .update-blurb {
   text-align: right;
@@ -117,6 +129,7 @@ content img {
   margin: 20px auto;
   width: 80%;
   display: block;
+  transition: height ease 250ms;
 }
 
 @media all and (max-width: 890px) {
@@ -141,9 +154,16 @@ content button {
   background-color: white;
   font-size: 24px;
   border-radius: 10px;
+  transition: color 250ms ease, background-color 250ms ease;
 }
 content button:hover {
   background-color: rgb(37, 49, 141);
+  color: white;
+}
+content button:disabled {
+  background-color: lightgrey;
+  cursor: unset;
+  color: white;
 }
 .nav-button:hover {
   background-color:rgb(64, 77, 174);
