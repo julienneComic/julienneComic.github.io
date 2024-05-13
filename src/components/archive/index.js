@@ -83,15 +83,11 @@ const setupArchivePage = async () => {
 <archive-row-component id="chapter-${chapterNumber}"></archive-row-component>
 `,
     );
-    console.log(document.getElementById(`chapter-${chapterNumber}`));
     const [summary, pageChildren] = document
       .getElementById(`chapter-${chapterNumber}`)
       .getElementsByTagName("details")[0].children;
-    // console.log(details);
-    // const summary = details.firstChild;
-    // const pageChildren = details.lastChild;
-    summary.children[0].innerText = `Chapter ${chapterNumber}`;
-    for (const pageNumber of body[chapterNumber]) {
+    summary.children[0].innerText = `Chapter ${chapterNumber}: ${body[chapterNumber].title}`;
+    for (const pageNumber of body[chapterNumber].pages) {
       pageChildren.insertAdjacentHTML(
         "beforeend",
         `

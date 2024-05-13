@@ -1,0 +1,96 @@
+{
+  "characters": [
+    {
+      "image": "./assets/julienne-thumbnail.webp",
+      "name": "JULIENNE ZHAVALA",
+      "tableRows": [
+        {
+          "label": "Species",
+          "data": ["Hydrophin"]
+        },
+        {
+          "label": "Age",
+          "data": ["28"]
+        },
+        {
+          "label": "Profession",
+          "data": ["Unemployed"]
+        },
+        {
+          "label": "Traits",
+          "data": ["gloomy", "shy", "begrudging"]
+        }
+      ],
+      "description": "Orphaned hydrophin who masqueraded as human until it blew up in his face"
+    },
+    {
+      "image": "./assets/opal-thumbnail.webp",
+      "name": "OPAL REYES",
+      "tableRows": [
+        {
+          "label": "Species",
+          "data": ["Human"]
+        },
+        {
+          "label": "Age",
+          "data": ["28"]
+        },
+        {
+          "label": "Profession",
+          "data": ["Lawyer"]
+        },
+        {
+          "label": "Traits",
+          "data": ["outgoing", "empathetic", "bold"]
+        }
+      ],
+      "description": "Small town \"good kid\" turned urban civil rights activist."
+    },
+    {
+      "image": "./assets/gehenna-thumbnail.webp",
+      "name": "GEHENNA NOBLE",
+      "tableRows": [
+        {
+          "label": "Species",
+          "data": ["Hydrophin"]
+        },
+        {
+          "label": "Age",
+          "data": ["72"]
+        },
+        {
+          "label": "Profession",
+          "data": ["Engineer"]
+        },
+        {
+          "label": "Traits",
+          "data": ["audacious", "decisive", "nurturing"]
+        }
+      ],
+      "description": "Acclaimed architect of hydrophin mobility aids and infrastructure. Civil rights activist/philanthropist."
+    },
+    {
+      "image": "./assets/quiye-thumbnail.webp",
+      "name": "QUIYE ALARI",
+      "tableRows": [
+        {
+          "label": "Species",
+          "data": ["Hydrophin"]
+        },
+        {
+          "label": "Age",
+          "data": ["71"]
+        },
+        {
+          "label": "Profession",
+          "data": ["Engineer"]
+        },
+        {
+          "label": "Traits",
+          "data": ["bookish", "formal", "gentle"]
+        }
+      ],
+      "description": "Linguist and academic, university professor of both hydrophin and human students. Essayist on topics of culture, prejudice, and civil rights. Activist/philanthropist."
+    }
+  ]
+}
