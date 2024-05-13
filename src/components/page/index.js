@@ -68,7 +68,13 @@ class Page extends HTMLElement {
 `;
   }
 }
+
 customElements.define("page-component", Page);
+
+/**
+ * used to disable buttons as the page loads
+ * @param {Boolean} disabled should the buttons be disabled
+ */
 const setButtonsDisabled = (disabled) => {
   const firstPage = d.getElementById("first-page");
   if (firstPage) {
@@ -87,6 +93,7 @@ const setButtonsDisabled = (disabled) => {
     lastPage.disabled = disabled;
   }
 };
+
 const handleFirstPageClick = () => {
   setQueryValue("page", 1);
   setupPageView(1);
@@ -104,6 +111,8 @@ const handleNextPageClick = () => {
 const handleLastPageClick = () => {
   setQueryValue("page", 1);
 };
+
+// remove event listeners to prevent memory leak
 const handlePageCleanup = () => {
   if (d.getElementById("previousPage")) {
     d.getElementById("firstPage").removeEventListener(
@@ -123,17 +132,20 @@ const handlePageCleanup = () => {
       handleLastPageClick,
     );
   }
-};
-const setupPageView = async (page) => {
-  d.getElementById("loading")?.classList.add("loading");
-  setButtonsDisabled(true);
-  handlePageCleanup();
   const image = d.getElementById("page-image");
   if (image) {
     image.src = "";
   }
+};
+const setupPageView = async (page) => {
+  // make sure users can't interact with the buttons before the new values have been set
+  d.getElementById("loading")?.classList.add("loading");
+  setButtonsDisabled(true);
+  handlePageCleanup();
+
   const response = await fetch(`./pages/page_${page}.json`);
   const pageData = await response.json();
+
   setButtonsDisabled(false);
   d.getElementById("loading")?.classList.remove("loading");
   d.getElementById("page-image").src = pageData.image;
@@ -166,5 +178,3 @@ if (!page) {
 }
 
 setupPageView(page);
-
-console.log("page view finished");

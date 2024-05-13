@@ -7,52 +7,52 @@ class About extends HTMLElement {
     this.innerHTML = `
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Questrial&family=Syne:wght@400..800&display=swap');
-content {
+section {
   margin: 28px auto;
   font-family: Questrial, sans-serif;
   max-width: 981px;
   display: block;
 }
-content h3 {
+section h3 {
   font-family: Syne, sans-serif;
   font-size: 36px;
   margin-bottom: 28px;
   text-transform: uppercase;
 }
-content h4 {
+section h4 {
   margin: 0;
   font: normal normal normal 16px/1.4em questrial,sans-serif;
   font-size: 22px;
   font-weight: bold;
 }
-content div.container {
+section div.container {
   padding: 0 24px;
 }
-content p {
+section p {
   font: normal normal normal 20px/1.4em questrial,sans-serif;
 }
-content div.about-the-author {
+section div.about-the-author {
   display: flex;
   padding-bottom: 24px;
 }
-content img {
+section img {
   width: auto;
   height: 225px;
   padding-right: 24px;
 }
   @media all and (max-width: 700px) {
-  content div.about-the-author {
+  section div.about-the-author {
     flex-direction: column;
     margin: 0 auto;
   }
-  content img {
+  section img {
     max-width: 280px;
     margin: 0 auto;
     padding-bottom: 24px;
   }
 }
 </style>
-<content>
+<section>
   <div class="container">
     <h3>About the Comic</h3>
     <br />
@@ -93,7 +93,7 @@ content img {
       </div>
     </div>
   </div>
-</content>
+</section>
 `;
   }
 }

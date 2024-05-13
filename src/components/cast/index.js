@@ -67,6 +67,7 @@ const setupCastPage = async () => {
   const response = await fetch("./src/data/cast.json");
   const data = await response.json();
   const content = document.getElementById("content");
+
   for (const character of data.characters) {
     const tableRows = character.tableRows.reduce(
       (previousValue, { label, data }) => {

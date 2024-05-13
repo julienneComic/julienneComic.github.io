@@ -6,30 +6,30 @@ class Archive extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
 <style>
-content {
+section {
   margin: 28px auto;
   max-width: 981px;
   padding: 20px 0;
   display: block;
 }
-content h2 {
+section h2 {
   padding: 0px 20px 20px 20px;
 }
-content details {
+section details {
   background-color: #d0fffe;
   margin: 16px;
   padding-bottom: 20px;
 }
-content summary {
+section summary {
   display: block;
   curosr: pointer;
   padding: 20px 20px 0 20px;
 }
-content ul {
+section ul {
   display: flex;
   flex-wrap: wrap;
 }
-content li {
+section li {
   width: 80px;
   padding: 8px;
   margin: 8px;
@@ -37,7 +37,7 @@ content li {
   background-color: #b1f9f9;
   transition: background-color 250ms;
 }
-content li:hover {
+section li:hover {
   background-color: white;
 }
 a:link    {color:#000;}  /* unvisited link  */
@@ -45,37 +45,40 @@ a:visited {color:#000;}  /* visited link    */
 a:hover   {color:#000;}  /* mouse over link */
 a:active  {color:#000;} 
 </style>
-<content id="content">
+<section id="content">
   <h2>Archive</h2>
-</content>
+</section>
 `;
   }
 }
 
 customElements.define("archive-component", Archive);
+
+class ArchiveRow extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    this.innerHTML = `
+<details>
+  <summary><h3></h3></summary>
+  <ul></ul>
+</details>
+  `;
+  }
+}
+
+customElements.define("archive-row-component", ArchiveRow);
+
 const setupArchivePage = async () => {
   const content = document.getElementById("content");
   const response = await fetch(`./src/data/archive.json`);
   const body = await response.json();
-  class ArchiveRow extends HTMLElement {
-    constructor() {
-      super();
-    }
 
-    connectedCallback() {
-      this.innerHTML = `
-<style>
-</style>
-  <details>
-    <summary><h3></h3></summary>
-    <ul></ul>
-  </details>
-  `;
-    }
-  }
-  customElements.define("archive-row-component", ArchiveRow);
   let postNumber = 1;
   const chapterNumbers = Object.keys(body);
+  // loop through all the chapters create a details summary group for each
   for (const chapterNumber of chapterNumbers) {
     content.insertAdjacentHTML(
       "beforeend",
@@ -87,6 +90,8 @@ const setupArchivePage = async () => {
       .getElementById(`chapter-${chapterNumber}`)
       .getElementsByTagName("details")[0].children;
     summary.children[0].innerText = `Chapter ${chapterNumber}: ${body[chapterNumber].title}`;
+
+    // loop through all the chapterNumbers
     for (const pageNumber of body[chapterNumber].pages) {
       pageChildren.insertAdjacentHTML(
         "beforeend",
