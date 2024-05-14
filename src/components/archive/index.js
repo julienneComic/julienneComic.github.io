@@ -40,6 +40,9 @@ section li {
 section li:hover {
   background-color: white;
 }
+section h3 {
+  font-size: 28px;
+}
 a:link    {color:#000;}  /* unvisited link  */
 a:visited {color:#000;}  /* visited link    */
 a:hover   {color:#000;}  /* mouse over link */

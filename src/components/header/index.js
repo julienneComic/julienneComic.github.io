@@ -5,24 +5,6 @@ class Header extends HTMLElement {
 
   connectedCallback() {
     this.innerHTML = `
-<script>
-  function openNav() {
-    navBar ??= d.getElementById("nav-bar");
-    navBar.classList.add("open");
-    navBar.classList.add("transition");
-  }
-
-  function closeNav() {
-    navBar ??= d.getElementById("nav-bar");
-    navBar.classList.remove("open");
-  }
-
-  d.addEventListener("keyup", function pressEscape(event) {
-    if ((event.keyCode = "27")) {
-      closeNav();
-    }
-  });
-</script>
 <header class="header-container">
   <h2 class="update-blurb">Updates Fridays</h2>
   <h1 class="site-title">JULIENNE</h1>

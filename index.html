@@ -9,6 +9,65 @@
       content="A web comic about friendship, crying, and trauma recovery"
     />
     <link rel="prefetch" href="./assets/header_25_percent.webp" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Julienne the graphic novel's home on the internet</title>
+    <script>
+      let navBar;
+      const d = document;
+      const w = window;
+      function openNav() {
+        navBar ??= document.getElementById("nav-bar");
+        navBar.classList.add("open");
+        navBar.classList.add("transition");
+      }
+
+      function closeNav() {
+        navBar ??= document.getElementById("nav-bar");
+        navBar.classList.remove("open");
+      }
+
+      document.addEventListener("keyup", function pressEscape(event) {
+        if ((event.keyCode = "27")) {
+          closeNav();
+        }
+      });
+
+      const getQueryValue = (query) => {
+        const url = new URL(location);
+        return url.searchParams.get(query);
+      };
+      const setQueryValue = (query, value) => {
+        const url = new URL(location);
+        url.searchParams.set(query, value);
+        history.pushState({}, "", url);
+      };
+
+      const view = getQueryValue("view");
+      if (!view) {
+        setQueryValue("view", "page");
+      }
+      const head = document.getElementsByTagName("head")[0];
+      const js = document.createElement("script");
+
+      js.type = "text/javascript";
+      switch (view) {
+        case "page":
+          js.src = "./src/components/page/index.js";
+          break;
+        case "archive":
+          js.src = "./src/components/archive/index.js";
+          break;
+        case "about":
+          js.src = "./src/components/about/index.js";
+          break;
+        case "cast":
+          js.src = "./src/components/cast/index.js";
+          break;
+      }
+
+      head.appendChild(js);
+      console.log("base script finished");
+    </script>
     <script
       src="./src/components/header/index.js"
       type="text/javascript"
@@ -17,50 +76,7 @@
       src="./src/components/footer/index.js"
       type="text/javascript"
     ></script>
-    <link rel="stylesheet" href="style.css" />
-    <title>Julienne the graphic novel's home on the internet</title>
   </head>
-  <script>
-    let navBar;
-    const d = document;
-    const w = window;
-
-    const getQueryValue = (query) => {
-      const url = new URL(location);
-      return url.searchParams.get(query);
-    };
-    const setQueryValue = (query, value) => {
-      const url = new URL(location);
-      url.searchParams.set(query, value);
-      history.pushState({}, "", url);
-    };
-
-    const view = getQueryValue("view");
-    if (!view) {
-      setQueryValue("view", "page");
-    }
-    const head = document.getElementsByTagName("head")[0];
-    const js = document.createElement("script");
-
-    js.type = "text/javascript";
-    switch (view) {
-      case "page":
-        js.src = "./src/components/page/index.js";
-        break;
-      case "archive":
-        js.src = "./src/components/archive/index.js";
-        break;
-      case "about":
-        js.src = "./src/components/about/index.js";
-        break;
-      case "cast":
-        js.src = "./src/components/cast/index.js";
-        break;
-    }
-
-    head.appendChild(js);
-    console.log("base script finished");
-  </script>
 
   <body>
     <div id="loading"></div>

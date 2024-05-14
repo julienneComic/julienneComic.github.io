@@ -32,10 +32,13 @@ section img {
   height: 142px;
 }
 section h2 {
-  font-size: 28px;
+  font-size: 36px;
   width: 100%;
   margin-bottom: 20px;
   padding-left: 40px;
+}
+section h3 {
+  font-size: 28px;
 }
 section th {
   text-align: left;
@@ -49,6 +52,11 @@ padding-bottom: 20px;
 }
 @media (min-width: 800px) {
   .character {
+    width: 50%;
+  }
+}
+@media (max-width: 400px) {
+  section h3 {
     width: 50%;
   }
 }
@@ -87,8 +95,8 @@ const setupCastPage = async () => {
     const characterMarkup = `
   <div class="character">
     <img src="${character.image}">
+    <h3>${character.name}</h3>
     <div>
-      <h3>${character.name}</h3>
       <table
         <tbody>
           ${tableRows}
