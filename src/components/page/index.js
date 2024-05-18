@@ -58,11 +58,11 @@ class Page extends HTMLElement {
 <content>
   <img id="page-image" src="" />
   <div>
-    <a id="first-page" href="./?view=page&page=1"><<</a>
-    <a id="previous-page" href="./?view=page&page=2"><</a>
+    <a id="first-page" href="./?view=pages&page=1"><<</a>
+    <a id="previous-page" href="./?view=pages&page=2"><</a>
     <p id="page-number"></p>
-    <a id="next-page" href="./?view=page&page=3">></a>
-    <a id="last-page" href="./?view=page&page=93">>></a>
+    <a id="next-page" href="./?view=pages&page=3">></a>
+    <a id="last-page" href="./?view=pages&page=93">>></a>
   </div>
 </content>
 `;
@@ -95,21 +95,21 @@ const setButtonsDisabled = (disabled) => {
 };
 
 const handleFirstPageClick = () => {
-  setQueryValue("page", 1);
+  setQueryValue("pages", 1);
   setupPageView(1);
 };
 const handlePreviousPageClick = () => {
   const newPage = Number(page) - 1;
-  setQueryValue("page", newPage);
+  setQueryValue("pages", newPage);
   setupPageView(newPage);
 };
 const handleNextPageClick = () => {
   const newPage = Number(page) + 1;
-  setQueryValue("page", newPage);
+  setQueryValue("pages", newPage);
   setupPageView(newPage);
 };
 const handleLastPageClick = () => {
-  setQueryValue("page", 1);
+  setQueryValue("pages", 1);
 };
 
 // remove event listeners to prevent memory leak
@@ -145,7 +145,6 @@ const setupPageView = async (page) => {
 
   const response = await fetch(`./pages/page_${page}.json`);
   const pageData = await response.json();
-
   setButtonsDisabled(false);
   d.getElementById("loading")?.classList.remove("loading");
   d.getElementById("page-image").src = pageData.image;
@@ -166,8 +165,8 @@ const setupPageView = async (page) => {
     d.getElementById("previous-page").disabled = false;
   }
   d.getElementById("previous-page").href =
-    `./?view=page&page=${Number(page) - 1}`;
-  d.getElementById("next-page").href = `./?view=page&page=${Number(page) + 1}`;
+    `./?view=pages&page=${Number(page) - 1}`;
+  d.getElementById("next-page").href = `./?view=pages&page=${Number(page) + 1}`;
   d.getElementById("page-number").textContent = page;
 };
 
@@ -176,5 +175,5 @@ if (!page) {
   page = 1;
   setQueryValue("page", 1);
 }
-
 setupPageView(page);
+console.log("page script finished");

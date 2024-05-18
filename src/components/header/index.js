@@ -17,9 +17,8 @@ class Header extends HTMLElement {
       </li>
       <li><a href="./?view=pages&page=93" class="nav-button">LATEST</a></li>
       <li>
-        <a href="./?view=page&page=1" class="nav-button"
-          >START FROM THE BEGINNING</a
-        >
+        <a href="./?view=pages&page=1" class="nav-button"
+          >START FROM THE BEGINNING</a>
       </li>
       <li><a href="./?view=about" class="nav-button">ABOUT</a></li>
       <li><a href="./?view=cast" class="nav-button">CAST</a></li>

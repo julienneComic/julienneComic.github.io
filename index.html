@@ -42,16 +42,18 @@
         history.pushState({}, "", url);
       };
 
-      const view = getQueryValue("view");
+      let view = getQueryValue("view");
       if (!view) {
-        setQueryValue("view", "page");
+        setQueryValue("view", "pages");
+        view = "pages";
       }
       const head = document.getElementsByTagName("head")[0];
       const js = document.createElement("script");
 
       js.type = "text/javascript";
+      console.log(view);
       switch (view) {
-        case "page":
+        case "pages":
           js.src = "./src/components/page/index.js";
           break;
         case "archive":
