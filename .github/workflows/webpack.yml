@@ -28,7 +28,7 @@ jobs:
           yarn
           yarn build
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-pages-artifact@v1
         with:
           name: github-pages
           path: ./dist
@@ -49,8 +49,5 @@ jobs:
           name: github-pages
           path: .
       - uses: actions/configure-pages@v1
-      - uses: actions/upload-pages-artifact@v1
-        with:
-          path: .
       - id: deployment
         uses: actions/deploy-pages@main
