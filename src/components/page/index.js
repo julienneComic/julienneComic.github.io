@@ -46,6 +46,7 @@ class Page extends HTMLElement {
     width: 80%;
     display: block;
     transition: height ease 250ms;
+    min-height: 80vh;
   }
 
   @media all and (max-width: 890px) {
@@ -76,19 +77,19 @@ customElements.define("page-component", Page);
  * @param {Boolean} disabled should the buttons be disabled
  */
 const setButtonsDisabled = (disabled) => {
-  const firstPage = d.getElementById("first-page");
+  const firstPage = document.getElementById("first-page");
   if (firstPage) {
     firstPage.disabled = disabled;
   }
-  const previousPage = d.getElementById("previous-page");
+  const previousPage = document.getElementById("previous-page");
   if (previousPage) {
     previousPage.disabled = disabled;
   }
-  const nextPage = d.getElementById("next-page");
+  const nextPage = document.getElementById("next-page");
   if (nextPage) {
     nextPage.disabled = disabled;
   }
-  const lastPage = d.getElementById("last-page");
+  const lastPage = document.getElementById("last-page");
   if (lastPage) {
     lastPage.disabled = disabled;
   }
@@ -114,25 +115,21 @@ const handleLastPageClick = () => {
 
 // remove event listeners to prevent memory leak
 const handlePageCleanup = () => {
-  if (d.getElementById("previousPage")) {
-    d.getElementById("firstPage").removeEventListener(
-      "click",
-      handleFirstPageClick,
-    );
-    d.getElementById("previousPage").removeEventListener(
-      "click",
-      handlePreviousPageClick,
-    );
-    d.getElementById("nextPage").removeEventListener(
-      "click",
-      handleNextPageClick,
-    );
-    d.getElementById("lastPage").removeEventListener(
-      "click",
-      handleLastPageClick,
-    );
+  if (document.getElementById("previousPage")) {
+    document
+      .getElementById("firstPage")
+      .removeEventListener("click", handleFirstPageClick);
+    document
+      .getElementById("previousPage")
+      .removeEventListener("click", handlePreviousPageClick);
+    document
+      .getElementById("nextPage")
+      .removeEventListener("click", handleNextPageClick);
+    document
+      .getElementById("lastPage")
+      .removeEventListener("click", handleLastPageClick);
   }
-  const image = d.getElementById("page-image");
+  const image = document.getElementById("page-image");
   if (image) {
     image.src = "";
   }
@@ -142,32 +139,38 @@ const setupPageView = async (page) => {
   d.getElementById("loading")?.classList.add("loading");
   setButtonsDisabled(true);
   handlePageCleanup();
-
-  const response = await fetch(`./pages/page_${page}.json`);
+  if (
+    document.referrer &&
+    new URL(document.referrer).searchParams.get("page")
+  ) {
+    location.hash = "page-image";
+  }
+  const response = await fetch(`./page_${page}.json`);
+  if (response.status !== 200) console.warn("Page data can't be loaded");
   const pageData = await response.json();
   setButtonsDisabled(false);
-  d.getElementById("loading")?.classList.remove("loading");
-  d.getElementById("page-image").src = pageData.image;
+  document.getElementById("loading")?.classList.remove("loading");
+  document.getElementById("page-image").src = pageData.image;
   if (pageData.text) {
-    const descriptionElement = d.createElement("p");
+    const descriptionElement = document.createElement("p");
     descriptionElement.textContent = pageData.text;
     descriptionElement.classList.add("description");
-    d.getElomentByTagName("page-image")[0].insertAdjacentElement(
-      "afterend",
-      descriptionElement,
-    );
+    document
+      .getElomentByTagName("page-image")[0]
+      .insertAdjacentElement("afterend", descriptionElement);
   }
   if (page < 2) {
-    d.getElementById("first-page").disabled = true;
-    d.getElementById("previous-page").disabled = true;
+    document.getElementById("first-page").disabled = true;
+    document.getElementById("previous-page").disabled = true;
   } else {
-    d.getElementById("first-page").disabled = false;
-    d.getElementById("previous-page").disabled = false;
+    document.getElementById("first-page").disabled = false;
+    document.getElementById("previous-page").disabled = false;
   }
-  d.getElementById("previous-page").href =
+  document.getElementById("previous-page").href =
     `./?view=pages&page=${Number(page) - 1}`;
-  d.getElementById("next-page").href = `./?view=pages&page=${Number(page) + 1}`;
-  d.getElementById("page-number").textContent = page;
+  document.getElementById("next-page").href =
+    `./?view=pages&page=${Number(page) + 1}`;
+  document.getElementById("page-number").textContent = page;
 };
 
 let page = getQueryValue("page");

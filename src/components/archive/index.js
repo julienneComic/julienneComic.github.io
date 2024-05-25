@@ -1,3 +1,5 @@
+const pageData = require("../../data/archive.json");
+
 class Archive extends HTMLElement {
   constructor() {
     super();
@@ -14,6 +16,7 @@ section {
 }
 section h2 {
   padding: 0px 20px 20px 20px;
+  font-size: 36px;
 }
 section details {
   background-color: #d0fffe;
@@ -76,11 +79,9 @@ customElements.define("archive-row-component", ArchiveRow);
 
 const setupArchivePage = async () => {
   const content = document.getElementById("content");
-  const response = await fetch(`./src/data/archive.json`);
-  const body = await response.json();
 
   let postNumber = 1;
-  const chapterNumbers = Object.keys(body);
+  const chapterNumbers = Object.keys(pageData);
   // loop through all the chapters create a details summary group for each
   for (const chapterNumber of chapterNumbers) {
     content.insertAdjacentHTML(
@@ -92,10 +93,10 @@ const setupArchivePage = async () => {
     const [summary, pageChildren] = document
       .getElementById(`chapter-${chapterNumber}`)
       .getElementsByTagName("details")[0].children;
-    summary.children[0].innerText = `Chapter ${chapterNumber}: ${body[chapterNumber].title}`;
+    summary.children[0].innerText = `Chapter ${chapterNumber}: ${pageData[chapterNumber].title}`;
 
     // loop through all the chapterNumbers
-    for (const pageNumber of body[chapterNumber].pages) {
+    for (const pageNumber of pageData[chapterNumber].pages) {
       pageChildren.insertAdjacentHTML(
         "beforeend",
         `
@@ -108,5 +109,4 @@ const setupArchivePage = async () => {
     }
   }
 };
-
-setupArchivePage();
+window.addEventListener("load", setupArchivePage);

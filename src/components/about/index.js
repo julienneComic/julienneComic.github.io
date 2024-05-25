@@ -80,7 +80,7 @@ section img {
     <br />
     <h3>About the Author</h3>
     <div class="about-the-author">
-      <img src="../../assets/selfportrait2018.webp"/>
+      <img src="/selfportrait2018.webp"/>
       <div>
         <p><b>Sara</b> is a writer and illustrator passionate about the complicated journey of learning to
         love and liberate our whole selves. She lives in the PNW with her old lady tuxedo cat and little 

@@ -13,7 +13,7 @@ class Footer extends HTMLElement {
           <img
             alt="instagram"
             class="social-icon"
-            src="./assets/instagram logo.png"
+            src="./instagram logo.png"
           />
         </a>
       </li>
@@ -22,7 +22,7 @@ class Footer extends HTMLElement {
           <img
             alt="twitter"
             class="social-icon"
-            src="./assets/twitter logo.webp"
+            src="./twitter logo.webp"
           />
         </a>
       </li>
@@ -31,7 +31,7 @@ class Footer extends HTMLElement {
           <img
             alt="kofi"
             class="social-icon"
-            src="./assets/kofi logo.webp"
+            src="./kofi logo.webp"
           />
         </a>
       </li>
@@ -40,7 +40,7 @@ class Footer extends HTMLElement {
           <img
             alt="patreon"
             class="social-icon"
-            src="./assets/patreon logo.webp"
+            src="./patreon logo.webp"
           />
         </a>
       </li>
@@ -50,10 +50,19 @@ class Footer extends HTMLElement {
     <h2>Sign up for email notifications!</h2>
     <h3>Receive an email when the comic updates.</h3>
   </div>
-  <p class="copywrite">Art and Story © Sara Nutter 2023</p>
+  <p id="copywrite">Art and Story © Sara Nutter 2023</p>
 </footer>
 `;
   }
 }
 
 customElements.define("footer-component", Footer);
+
+const setupFooter = () => {
+  // waiting for the load event ensures the copywrite event exists
+  window.addEventListener("load", () => {
+    document.getElementById("copywrite").innerText =
+      `Art and Story © Sara Nutter ${new Date().getFullYear()}`;
+  });
+};
+setupFooter();

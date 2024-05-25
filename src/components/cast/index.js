@@ -72,7 +72,7 @@ padding-bottom: 20px;
 customElements.define("cast-component", Cast);
 
 const setupCastPage = async () => {
-  const response = await fetch("./src/data/cast.json");
+  const response = await fetch("./cast.json");
   const data = await response.json();
   const content = document.getElementById("content");
 
@@ -110,4 +110,4 @@ const setupCastPage = async () => {
   }
 };
 
-setupCastPage();
+window.addEventListener("load", setupCastPage);

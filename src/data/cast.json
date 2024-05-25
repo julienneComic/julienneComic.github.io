@@ -1,7 +1,7 @@
 {
   "characters": [
     {
-      "image": "./assets/julienne-thumbnail.webp",
+      "image": "./julienne-thumbnail.webp",
       "name": "JULIENNE ZHAVALA",
       "tableRows": [
         {
@@ -24,7 +24,7 @@
       "description": "Orphaned hydrophin who masqueraded as human until it blew up in his face"
     },
     {
-      "image": "./assets/opal-thumbnail.webp",
+      "image": "./opal-thumbnail.webp",
       "name": "OPAL REYES",
       "tableRows": [
         {
@@ -47,7 +47,7 @@
       "description": "Small town \"good kid\" turned urban civil rights activist."
     },
     {
-      "image": "./assets/gehenna-thumbnail.webp",
+      "image": "./gehenna-thumbnail.webp",
       "name": "GEHENNA NOBLE",
       "tableRows": [
         {
@@ -70,7 +70,7 @@
       "description": "Acclaimed architect of hydrophin mobility aids and infrastructure. Civil rights activist/philanthropist."
     },
     {
-      "image": "./assets/quiye-thumbnail.webp",
+      "image": "./quiye-thumbnail.webp",
       "name": "QUIYE ALARI",
       "tableRows": [
         {
