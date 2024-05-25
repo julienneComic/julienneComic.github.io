@@ -30,7 +30,7 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: built-app
+          name: github-pages
           path: ./dist
   deploy:
     runs-on: ubuntu-latest
@@ -46,7 +46,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@master
         with:
-          name: built-app
+          name: github-pages
           path: .
       - uses: actions/configure-pages@v1
       - uses: actions/upload-pages-artifact@v1
