@@ -5,6 +5,30 @@ class Footer extends HTMLElement {
 
   connectedCallback() {
     this.innerHTML = `
+<style>
+footer {
+  background-color: black;
+  color: white;
+}
+.social-links {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+.social-links ul {
+  display: flex;
+  justify-content: space-between;
+}
+.social-icon {
+  width: 42px;
+  height: 42px;
+  margin-right: 12px;
+}
+.email {
+  text-align: center;
+  padding-bottom: 40px;
+}
+</style>
 <footer>
   <nav class="social-links">
     <ul>

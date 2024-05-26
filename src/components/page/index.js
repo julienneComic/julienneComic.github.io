@@ -46,7 +46,7 @@ class Page extends HTMLElement {
     width: 80%;
     display: block;
     transition: height ease 250ms;
-    min-height: 80vh;
+    min-height: 66vh;
   }
 
   @media all and (max-width: 890px) {
