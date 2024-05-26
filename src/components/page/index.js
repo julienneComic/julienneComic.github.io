@@ -59,11 +59,11 @@ class Page extends HTMLElement {
 <content>
   <img id="page-image" src="" />
   <div>
-    <a id="first-page" href="./?view=pages&page=1"><<</a>
-    <a id="previous-page" href="./?view=pages&page=2"><</a>
+    <a id="first-page" aria-label="first page" href="./?view=pages&page=1"><<</a>
+    <a id="previous-page" aria-label="previous page" href="./?view=pages&page=2"><</a>
     <p id="page-number"></p>
-    <a id="next-page" href="./?view=pages&page=3">></a>
-    <a id="last-page" href="./?view=pages&page=93">>></a>
+    <a id="next-page" aria-label="next page" href="./?view=pages&page=3">></a>
+    <a id="last-page" aria-label="last page" href="./?view=pages&page=93">>></a>
   </div>
 </content>
 `;
