@@ -1,3 +1,4 @@
+const data = require("./data.json");
 class Page extends HTMLElement {
   constructor() {
     super();
@@ -63,7 +64,7 @@ class Page extends HTMLElement {
     <a id="previous-page" aria-label="previous page" href="./?view=pages&page=2"><</a>
     <p id="page-number"></p>
     <a id="next-page" aria-label="next page" href="./?view=pages&page=3">></a>
-    <a id="last-page" aria-label="last page" href="./?view=pages&page=93">>></a>
+    <a id="last-page" aria-label="last page" href="./?view=pages&page=${data.lastPage}">>></a>
   </div>
 </content>
 `;

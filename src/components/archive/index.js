@@ -1,4 +1,4 @@
-const pageData = require("../../data/archive.json");
+const pageData = require("./data.json");
 
 class Archive extends HTMLElement {
   constructor() {

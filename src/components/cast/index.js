@@ -1,3 +1,5 @@
+const castData = require("./data.json");
+
 class Cast extends HTMLElement {
   constructor() {
     super();
@@ -72,11 +74,9 @@ padding-bottom: 20px;
 customElements.define("cast-component", Cast);
 
 const setupCastPage = async () => {
-  const response = await fetch("./cast.json");
-  const data = await response.json();
   const content = document.getElementById("content");
 
-  for (const character of data.characters) {
+  for (const character of castData.characters) {
     const tableRows = character.tableRows.reduce(
       (previousValue, { label, data }) => {
         const dataMarkup = data.join(`<br />`);

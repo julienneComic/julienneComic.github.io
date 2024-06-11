@@ -41,7 +41,6 @@ const generateConfig = (mode) => {
           { from: "./style.css" },
           { from: "./pages" },
           { from: "./assets" },
-          { from: "./src/data" },
         ],
       }),
     ],
