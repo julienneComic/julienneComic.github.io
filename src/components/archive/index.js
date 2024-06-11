@@ -81,9 +81,12 @@ const setupArchivePage = async () => {
   const content = document.getElementById("content");
 
   let postNumber = 1;
-  const chapterNumbers = Object.keys(pageData);
+
   // loop through all the chapters create a details summary group for each
-  for (const chapterNumber of chapterNumbers) {
+  for (let i = 0; i < pageData.chapters.length; i += 1) {
+    const chapterNumber = i + 1;
+    const chapterData = pageData.chapters[i];
+
     content.insertAdjacentHTML(
       "beforeend",
       `
@@ -93,10 +96,10 @@ const setupArchivePage = async () => {
     const [summary, pageChildren] = document
       .getElementById(`chapter-${chapterNumber}`)
       .getElementsByTagName("details")[0].children;
-    summary.children[0].innerText = `Chapter ${chapterNumber}: ${pageData[chapterNumber].title}`;
+    summary.children[0].innerText = `Chapter ${chapterNumber}: ${chapterData.title}`;
 
     // loop through all the chapterNumbers
-    for (const pageNumber of pageData[chapterNumber].pages) {
+    for (const pageNumber of chapterData.pages) {
       pageChildren.insertAdjacentHTML(
         "beforeend",
         `
