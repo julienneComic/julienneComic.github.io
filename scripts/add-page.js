@@ -1,25 +1,18 @@
-// #!/bin/bash
-// echo Welcome to the page creation wizard :-D
-// mkdir tempNewPage
-//
-// echo A new folder has been created in the root of this repo called tempNewPage. Please add the page image there
-//
-// read -p "Press enter when you're done adding the image"
-//
-// if ls ./tempNewPage/*.png 1>/dev/null 2>&1; then
-// 	echo "Image found, thanks!"
-// else
-// 	echo "No image in tempNewPage. Page Creation failed."
-// 	exit
-// fi
 console.log("Welcome to the page creation wizard");
 
 const fs = require("node:fs/promises");
+const path = require("path");
+const readline = require("node:readline");
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+const componentsPath = path.join(__dirname, "..", "src", "components");
 
 const creationWizard = async () => {
   // create a directory for the new page image to be added
   try {
-    await fs.mkdir(__dirname + "/tempNewPage");
+    await fs.mkdir(path.join(__dirname, "..", "tempNewPage"));
   } catch {
     console.log("\ntempNewPage already exists");
   }
@@ -30,12 +23,6 @@ const creationWizard = async () => {
 
   try {
     // wait for new image to be added
-    const readline = require("node:readline");
-    const rl = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout,
-    });
-
     await new Promise((resolve) => {
       rl.question("Press enter when you're done adding the image", () =>
         resolve(),
@@ -45,32 +32,25 @@ const creationWizard = async () => {
     console.log("\nerror waiting for the image to be added");
     throw error;
   }
-  const path = require("path");
   const tempNewPagePath = path.join(__dirname, "..", "tempNewPage");
 
   // Verify one new image has been added
   const images = await fs.readdir(tempNewPagePath);
-  console.log(images.length, tempNewPagePath);
   if (images.length !== 1) {
     throw new Error(`There should only be one image in the newTempPage.
-Please ensure there is only one image in the newTempPage directory and restart the script`);
+   Please ensure there is only one image in the newTempPage directory and restart the script`);
   }
 
-  const pageMetadataPath = path.join(
-    __dirname,
-    "..",
-    "src",
-    "components",
-    "page",
-    "data.json",
-  );
+  const pageMetadataPath = path.join(componentsPath, "page", "data.json");
   const pageMetadata = require(pageMetadataPath);
   const newPageImageNumber = pageMetadata.lastPage + 1;
-  const imageFileExtension = images[0].split(".")[1];
+  const imageFileArray = images[0].split(".");
+  const imageFileExtension = imageFileArray[imageFileArray.length - 1];
   const newImageFileName =
     "page_" + newPageImageNumber + "." + imageFileExtension;
   const newImagePath = path.join(__dirname, "..", "assets", newImageFileName);
   const providedImagePath = path.join(tempNewPagePath, images[0]);
+
   // Move new image to assets with a useful name
   try {
     await fs.rename(providedImagePath, newImagePath);
@@ -83,10 +63,67 @@ Please ensure there is only one image in the newTempPage directory and restart t
     );
     throw error;
   }
-  // use image's new location to create a page json file
-  // increment the lastpage property in the page/data.json so the buttons that use the value will be updated
-  // Let the user know this worked
 
+  // ask if this is the first page of a new chapter. Update the archiveData given that choice
+  try {
+    let answer = await new Promise((resolve) => {
+      rl.question(
+        "Is this the first page of a new chapter? y or n: ",
+        (answer) => resolve(answer === "y" || answer === "Y"),
+      );
+    });
+    const archiveDataPath = path.join(componentsPath, "archive", "data.json");
+    const archiveData = require(archiveDataPath);
+    const lastChapter = archiveData.chapters[archiveData.chapters.length - 1];
+    if (answer) {
+      let chapterTitle = await new Promise((resolve) => {
+        rl.question("What is the title of the new chapter?", (answer) =>
+          resolve(answer),
+        );
+      });
+      archiveData.chapters.push({ title: chapterTitle, pages: [1] });
+    } else {
+      lastChapter.pages.push(
+        lastChapter.pages[lastChapter.pages.length - 1] + 1,
+      );
+    }
+    await fs.writeFile(archiveDataPath, JSON.stringify(archiveData));
+  } catch (error) {
+    console.log("Error updating Archive data", error);
+  }
+
+  // use new image location and archive data to create page json file
+  const archiveData = require("../src/components/archive/data.json");
+  const lastChapter = archiveData.chapters[archiveData.chapters.length - 1];
+  const lastPage = lastChapter.pages[lastChapter.pages.length - 1];
+  try {
+    await fs.writeFile(
+      path.join(__dirname, "..", "pages", `page_${newPageImageNumber}.json`),
+      `{
+  "image": "./page_${newPageImageNumber}.${imageFileExtension}",
+  "description": "",
+  "chapter": ${archiveData.chapters.length},
+  "pageNumber": ${lastPage + 1}
+}`,
+    );
+  } catch (error) {
+    console.log("Error generating page file", error);
+  }
+
+  // increment the lastpage property in the page/data.json so the buttons that use the value will be updated
+  try {
+    const pagesDataPath = path.join(componentsPath, "page", "data.json");
+    const pagesData = require(pagesDataPath);
+    await fs.writeFile(
+      pagesDataPath,
+      JSON.stringify({ lastPage: pagesData.lastPage + 1 }),
+    );
+  } catch (error) {
+    console.log("Error updating pages component data file", error);
+  }
+
+  // Let the user know this worked
+  console.log("Success!");
   process.exit(0);
 };
 creationWizard();
