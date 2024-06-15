@@ -51,6 +51,12 @@ const creationWizard = async () => {
   const newImagePath = path.join(__dirname, "..", "assets", newImageFileName);
   const providedImagePath = path.join(tempNewPagePath, images[0]);
 
+  const archiveDataPath = path.join(componentsPath, "archive", "data.json");
+  const archiveData = require(archiveDataPath);
+
+  const lastChapter = archiveData.chapters[archiveData.chapters.length - 1];
+  const lastPage = lastChapter.pages[lastChapter.pages.length - 1];
+
   // Move new image to assets with a useful name
   try {
     await fs.rename(providedImagePath, newImagePath);
@@ -72,9 +78,6 @@ const creationWizard = async () => {
         (answer) => resolve(answer === "y" || answer === "Y"),
       );
     });
-    const archiveDataPath = path.join(componentsPath, "archive", "data.json");
-    const archiveData = require(archiveDataPath);
-    const lastChapter = archiveData.chapters[archiveData.chapters.length - 1];
     if (answer) {
       let chapterTitle = await new Promise((resolve) => {
         rl.question("What is the title of the new chapter?", (answer) =>
@@ -84,30 +87,30 @@ const creationWizard = async () => {
       archiveData.chapters.push({ title: chapterTitle, pages: [1] });
     } else {
       lastChapter.pages.push(
-        lastChapter.pages[lastChapter.pages.length - 1] + 1,
+        lastPage + 1,
       );
     }
     await fs.writeFile(archiveDataPath, JSON.stringify(archiveData));
   } catch (error) {
     console.log("Error updating Archive data", error);
+    throw error;
   }
-
+  console.log(lastPage, "lastPage")
   // use new image location and archive data to create page json file
-  const archiveData = require("../src/components/archive/data.json");
-  const lastChapter = archiveData.chapters[archiveData.chapters.length - 1];
-  const lastPage = lastChapter.pages[lastChapter.pages.length - 1];
   try {
+    const newestChapter = archiveData.chapters[archiveData.chapters.length - 1];
     await fs.writeFile(
       path.join(__dirname, "..", "pages", `page_${newPageImageNumber}.json`),
       `{
   "image": "./page_${newPageImageNumber}.${imageFileExtension}",
   "description": "",
   "chapter": ${archiveData.chapters.length},
-  "pageNumber": ${lastPage + 1}
+  "pageNumber": ${newestChapter.pages[newestChapter.pages.length - 1]}
 }`,
     );
   } catch (error) {
     console.log("Error generating page file", error);
+    throw error;
   }
 
   // increment the lastpage property in the page/data.json so the buttons that use the value will be updated
@@ -120,6 +123,7 @@ const creationWizard = async () => {
     );
   } catch (error) {
     console.log("Error updating pages component data file", error);
+    throw error;
   }
 
   // Let the user know this worked
