@@ -104,7 +104,7 @@ const setupArchivePage = async () => {
         "beforeend",
         `
 <li>
-  <a href="./?view=page&page=${postNumber}">Page ${pageNumber}</a>
+  <a href="./?view=pages&page=${postNumber}">Page ${pageNumber}</a>
 </li>
 `,
       );
