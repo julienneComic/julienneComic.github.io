@@ -10,16 +10,7 @@ const rl = readline.createInterface({
 const componentsPath = path.join(__dirname, "..", "src", "components");
 
 const creationWizard = async () => {
-  // create a directory for the new page image to be added
-  try {
-    await fs.mkdir(path.join(__dirname, "..", "tempNewPage"));
-  } catch {
-    console.log("\ntempNewPage already exists");
-  }
-
-  console.log(
-    "\nA new folder has been created in the root of this repo called tempNewPage. Please add the page image there",
-  );
+  // ask the user to select an image with the system's file explorer
   let providedImagePath = '';
   try {
     const script = `osascript -e 'tell application (path to frontmost application as text)
@@ -36,13 +27,13 @@ end'`;
     console.log("\nerror waiting for the image to be added");
     throw error;
   }
+  console.log(providedImagePath, 'Has been selected')
 
   const pageMetadataPath = path.join(componentsPath, "page", "data.json");
   const pageMetadata = require(pageMetadataPath);
   const newPageImageNumber = pageMetadata.lastPage + 1;
   const fileExtensionDivider = providedImagePath.lastIndexOf(".");
   const imageFileExtension = providedImagePath.slice(fileExtensionDivider, providedImagePath.length);
-  console.log(imageFileExtension, 'imageFileExtension')
   const newImageFileName = "page_" + newPageImageNumber + imageFileExtension;
   const newImagePath = path.join(__dirname, "..", "assets", newImageFileName);
   const archiveDataPath = path.join(componentsPath, "archive", "data.json");
@@ -50,10 +41,10 @@ end'`;
 
   const lastChapter = archiveData.chapters[archiveData.chapters.length - 1];
   const lastPage = lastChapter.pages[lastChapter.pages.length - 1];
-  console.log(providedImagePath, 'providedImagePath', 'newImagePath', newImagePath)
+
   // Move new image to assets with a useful name
   try {
-    await fs.rename(providedImagePath, newImagePath);
+    await fs.copyFile(providedImagePath, newImagePath);
   } catch (error) {
     console.log(
       "Error moving image to assets folder. Is there an image called",
@@ -68,13 +59,13 @@ end'`;
   try {
     let answer = await new Promise((resolve) => {
       rl.question(
-        "Is this the first page of a new chapter? y or n: ",
+        "Type 'y' and enter if this is the first page of a new chapter.\n Or just press enter if page is a part of an existing chapter: ",
         (answer) => resolve(answer === "y" || answer === "Y"),
       );
     });
     if (answer) {
       let chapterTitle = await new Promise((resolve) => {
-        rl.question("What is the title of the new chapter?", (answer) =>
+        rl.question("What is the title of the new chapter?: ", (answer) =>
           resolve(answer),
         );
       });
@@ -89,14 +80,13 @@ end'`;
     console.log("Error updating Archive data", error);
     throw error;
   }
-  console.log(lastPage, "lastPage")
   // use new image location and archive data to create page json file
   try {
     const newestChapter = archiveData.chapters[archiveData.chapters.length - 1];
     await fs.writeFile(
       path.join(__dirname, "..", "pages", `page_${newPageImageNumber}.json`),
       `{
-  "image": "./page_${newPageImageNumber}.${imageFileExtension}",
+  "image": "./page_${newPageImageNumber}${imageFileExtension}",
   "description": "",
   "chapter": ${archiveData.chapters.length},
   "pageNumber": ${newestChapter.pages[newestChapter.pages.length - 1]}
