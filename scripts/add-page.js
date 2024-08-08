@@ -20,43 +20,37 @@ const creationWizard = async () => {
   console.log(
     "\nA new folder has been created in the root of this repo called tempNewPage. Please add the page image there",
   );
-
+  let providedImagePath = '';
   try {
-    // wait for new image to be added
-    await new Promise((resolve) => {
-      rl.question("Press enter when you're done adding the image", () =>
-        resolve(),
-      );
-    });
+    const script = `osascript -e 'tell application (path to frontmost application as text)
+set myFile to choose file with prompt "Choose new Page image file" of type {["png", "webp", "jpg", "jpeg", "png"]}
+POSIX path of myFile
+end'`;
+
+    const util = require("util")
+    const exec = util.promisify(require("child_process").exec)
+    const { stdout, stderr } = await exec(script)
+    if (stderr !== "") throw new Error(stderr)
+    providedImagePath = stdout.slice(0, stdout.length - 1);
   } catch (error) {
     console.log("\nerror waiting for the image to be added");
     throw error;
-  }
-  const tempNewPagePath = path.join(__dirname, "..", "tempNewPage");
-
-  // Verify one new image has been added
-  const images = await fs.readdir(tempNewPagePath);
-  if (images.length !== 1) {
-    throw new Error(`There should only be one image in the newTempPage.
-   Please ensure there is only one image in the newTempPage directory and restart the script`);
   }
 
   const pageMetadataPath = path.join(componentsPath, "page", "data.json");
   const pageMetadata = require(pageMetadataPath);
   const newPageImageNumber = pageMetadata.lastPage + 1;
-  const imageFileArray = images[0].split(".");
-  const imageFileExtension = imageFileArray[imageFileArray.length - 1];
-  const newImageFileName =
-    "page_" + newPageImageNumber + "." + imageFileExtension;
+  const fileExtensionDivider = providedImagePath.lastIndexOf(".");
+  const imageFileExtension = providedImagePath.slice(fileExtensionDivider, providedImagePath.length);
+  console.log(imageFileExtension, 'imageFileExtension')
+  const newImageFileName = "page_" + newPageImageNumber + imageFileExtension;
   const newImagePath = path.join(__dirname, "..", "assets", newImageFileName);
-  const providedImagePath = path.join(tempNewPagePath, images[0]);
-
   const archiveDataPath = path.join(componentsPath, "archive", "data.json");
   const archiveData = require(archiveDataPath);
 
   const lastChapter = archiveData.chapters[archiveData.chapters.length - 1];
   const lastPage = lastChapter.pages[lastChapter.pages.length - 1];
-
+  console.log(providedImagePath, 'providedImagePath', 'newImagePath', newImagePath)
   // Move new image to assets with a useful name
   try {
     await fs.rename(providedImagePath, newImagePath);

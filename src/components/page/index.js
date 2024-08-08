@@ -160,18 +160,22 @@ const setupPageView = async (page) => {
       .getElomentByTagName("page-image")[0]
       .insertAdjacentElement("afterend", descriptionElement);
   }
-  if (page < 2) {
-    document.getElementById("first-page").disabled = true;
-    document.getElementById("previous-page").disabled = true;
-  } else {
-    document.getElementById("first-page").disabled = false;
-    document.getElementById("previous-page").disabled = false;
-  }
   document.getElementById("previous-page").href =
     `./?view=pages&page=${Number(page) - 1}`;
   document.getElementById("next-page").href =
     `./?view=pages&page=${Number(page) + 1}`;
   document.getElementById("page-number").textContent = page;
+  console.log("Number(page) < 2", Number(page) < 2)
+  if (Number(page) < 2) {
+    document.getElementById("first-page").herf = "";
+    document.getElementById("previous-page").href = "";
+  }
+  console.log("Number(page) < data.lastPage", !(Number(page) < data.lastPage))
+  if (!(Number(page) < data.lastPage)) {
+    console.log(document.getElementById("next-page"))
+    document.getElementById("next-page").href = "";
+    document.getElementById("last-page").href = "";
+  }
 };
 
 let page = getQueryValue("page");
