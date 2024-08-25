@@ -25,7 +25,7 @@ section details {
 }
 section summary {
   display: block;
-  curosr: pointer;
+  cursor: pointer;
   padding: 20px 20px 0 20px;
 }
 section ul {
