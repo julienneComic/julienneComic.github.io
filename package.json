@@ -7,11 +7,12 @@
   ],
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "add-page": "node ./scripts/add-page.js",
     "build": "NODE_ENV=production webpack",
     "dev": "NODE_ENV=development webpack serve",
-    "add-page": "node ./scripts/add-page.js",
-    "deploy": "./scripts/pushToProd.sh"
+    "deploy": "./scripts/pushToProd.sh",
+    "renameFiles": "node ./scripts/renameFiles.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -23,18 +24,17 @@
     "url": "https://github.com/julienneComic/julienneComic/issues"
   },
   "homepage": "https://github.com/julienneComic/julienneComic#readme",
-  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.24.5",
-    "prettier": "^3.2.5",
-    "selenium-webdriver": "^4.20.0",
-    "webpack": "^5.91.0",
     "@babel/preset-env": "^7.24.5",
     "@webpack-cli/generators": "^3.0.7",
     "babel-loader": "^9.1.3",
     "copy-webpack-plugin": "^12.0.2",
     "html-webpack-plugin": "^5.6.0",
+    "prettier": "^3.2.5",
+    "selenium-webdriver": "^4.20.0",
     "style-loader": "^4.0.0",
+    "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.4",
     "workbox-webpack-plugin": "^7.1.0"
