@@ -1,26 +1,36 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 git add .
 git diff --name-only --cached
-echo;
-statusCmd="git status --short";
-status="$statusCmd";
-if [ "$status" != "\n" ]; then
-  echo "\nDo you want to push these changes?"
+echo
+statusCmd="$(git status --short)"
+status="${statusCmd}"
+if [ -n "$status" ]; then
+  echo "
+Do you want to push these changes?"
   select yn in "Yes" "No"; do
-      case $yn in
-          Yes ) break;;
-          No ) echo "\nPlease remove changes to files you don't want pushed"; exit;;
-      esac
-  done;
-  read -p "\nWhat is the purpose of this push? " commitMessage;
-  git commit -m "$commitMessage";
+    case $yn in
+    Yes) break ;;
+    No)
+      echo "
+Please remove changes to files you don't want pushed"
+      exit
+      ;;
+    esac
+  done
+  read -p "What is the purpose of this push? " commitMessage
+  git commit -m "$commitMessage"
 fi
-read -p "\nEnter deploys to production or N to push to test." stageChanges;
-if ["$stageChanges" == "N" | "$stageChanges" == "n"]; then
-  git push origin HEAD
-  exit 0
-fi
-
-git push prod HEAD
+echo "
+Where do you want to push these changes?"
+select yn in "Test" "Prod" "Both"; do
+  case $yn in
+  Prod) git push prod HEAD ;;
+  Test) git push origin HEAD ;;
+  Both)
+    git push origin HEAD
+    git push origin prod HEAD
+    ;;
+  esac
+done
 exit 0
