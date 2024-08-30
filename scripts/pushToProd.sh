@@ -25,11 +25,18 @@ echo "
 Where do you want to push these changes?"
 select yn in "Test" "Prod" "Both"; do
   case $yn in
-  Prod) git push prod HEAD ;;
-  Test) git push origin HEAD ;;
+  Prod)
+    git push prod HEAD
+    break
+    ;;
+  Test)
+    git push origin HEAD
+    break
+    ;;
   Both)
     git push origin HEAD
     git push origin prod HEAD
+    break
     ;;
   esac
 done
