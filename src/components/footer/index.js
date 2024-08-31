@@ -71,10 +71,15 @@ footer {
     </ul>
   </nav>
   <div class="email">
-    <h2>Sign up for email notifications!</h2>
-    <h3>Receive an email when the comic updates.</h3>
+    <form method="post" action="https://sendfox.com/form/3qw75v/mn48ov" class="sendfox-form" id="mn48ov" data-async="true" data-recaptcha="true">
+      <p><label for="sendfox_form_email">Email: </label><input type="email" id="sendfox_form_email" placeholder="Email" name="email" required /></p>
+      <!-- no botz please -->
+      <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
+      <p><button type="submit">Subscribe!</button></p>
+    </form>
+    <script src="https://cdn.sendfox.com/js/form.js" charset="utf-8"></script>
   </div>
-  <p id="copywrite">Art and Story © Sara Nutter 2023</p>
+  <p id="copywrite">Art and Story © Sara Nutter 2024</p>
 </footer>
 `;
   }
