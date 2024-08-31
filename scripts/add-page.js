@@ -31,11 +31,13 @@ end'`;
 
   const pageMetadataPath = path.join(componentsPath, "page", "data.json");
   const pageMetadata = require(pageMetadataPath);
+
   const newPageImageNumber = pageMetadata.lastPage + 1;
   const fileExtensionDivider = providedImagePath.lastIndexOf(".");
   const imageFileExtension = providedImagePath.slice(fileExtensionDivider, providedImagePath.length);
   const newImageFileName = "page_" + newPageImageNumber + imageFileExtension;
   const newImagePath = path.join(__dirname, "..", "assets", newImageFileName);
+
   const archiveDataPath = path.join(componentsPath, "archive", "data.json");
   const archiveData = require(archiveDataPath);
 
@@ -83,8 +85,10 @@ end'`;
   // use new image location and archive data to create page json file
   try {
     const newestChapter = archiveData.chapters[archiveData.chapters.length - 1];
+    const newFileDirectoryName = __dirname, "..", "pages", `page_${newPageImageNumber}.json`
+
     await fs.writeFile(
-      path.join(__dirname, "..", "pages", `page_${newPageImageNumber}.json`),
+      path.join(newFileDirectoryName),
       `{
   "image": "./page_${newPageImageNumber}${imageFileExtension}",
   "description": "",
@@ -92,6 +96,9 @@ end'`;
   "pageNumber": ${newestChapter.pages[newestChapter.pages.length - 1]}
 }`,
     );
+
+    consoel.lgo("If you want to add a description edit the json file at this path", newFileDirectoryName);
+
   } catch (error) {
     console.log("Error generating page file", error);
     throw error;
@@ -101,6 +108,7 @@ end'`;
   try {
     const pagesDataPath = path.join(componentsPath, "page", "data.json");
     const pagesData = require(pagesDataPath);
+
     await fs.writeFile(
       pagesDataPath,
       JSON.stringify({ lastPage: pagesData.lastPage + 1 }),
