@@ -35,7 +35,7 @@ select yn in "Test" "Prod" "Both"; do
     ;;
   Both)
     git push origin HEAD
-    git push origin prod HEAD
+    git push prod HEAD
     break
     ;;
   esac
