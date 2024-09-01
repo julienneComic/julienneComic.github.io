@@ -8,22 +8,53 @@ class Page extends HTMLElement {
     this.innerHTML = `
 <style>
   content {
-    max-width: 980px;
     display: block;
     width: 100%;
     margin: 0 auto;
-    font-size: 24px;
+    font-size: 20px;
   }
-  content div {
+  content h3 {
+    font-size: 24px;
+    text-decoration: underline;
+  }
+  content .description {
+    padding: 20px 0 8px 0;
+    width: 100%;
+    background-color: #91cff4;
+  }
+  content .description div {
+    border: black 1px solid;
+    width: 70%;
+    margin: 0 auto;
+    background-color: #dbf2ff;
+    padding: 4px 4px 8px 4px;
+  }
+  content .description p {
+    padding-left: 16px;
+  }
+  content .description h3 {
+    padding-bottom: 4px;
+  }
+  content nav {
     display: flex;
     margin: 0 auto;
     margin-bottom: 40px;
-    width: 300px;
+    width: 80%;
+    padding: 0 20px;
     justify-content: space-around;
+    align-items: center;
+    max-width: 900px;
+    padding: 0 20px;
   }
-  content div a { 
+  #page_nav_divider {
+    height: 50px;
+  }
+  content nav a { 
       text-decoration: none;
       color: black;
+  }
+  content nav img {
+    height: 80px;
   }
   content a {
     cursor: pointer;
@@ -32,40 +63,47 @@ class Page extends HTMLElement {
     border-radius: 10px;
     transition: color 250ms ease, background-color 250ms ease;
   }
-  content a:hover {
-    background-color: rgb(37, 49, 141);
-    color: white;
-  }
   content a:disabled {
     background-color: lightgrey;
     cursor: unset;
     color: white;
   }
-  content img {
+  content img#page-image {
     padding: 20px;
     margin: 20px auto;
     width: 80%;
     display: block;
     transition: height ease 250ms;
     min-height: 66vh;
+    max-width: 900px;
   }
 
   @media all and (max-width: 890px) {
-    content img {
+    content img#page-image {
       padding: 20px 5px;
       width: 95%;
     }
   }
 </style>
 <content>
-  <img id="page-image" src="" />
-  <div>
-    <a id="first-page" aria-label="first page" href="./?view=pages&page=1"><<</a>
-    <a id="previous-page" aria-label="previous page" href="./?view=pages&page=2"><</a>
-    <p id="page-number"></p>
-    <a id="next-page" aria-label="next page" href="./?view=pages&page=3">></a>
-    <a id="last-page" aria-label="last page" href="./?view=pages&page=${data.lastPage}">>></a>
-  </div>
+  <a id="image-next-page" href="./?view=pages&page=3" >
+    <img id="page-image" src="" />
+  </a>
+  <nav id="page-nav" >
+    <a id="first-page" aria-label="first page" href="./?view=pages&page=1">
+      <img src="./page_nav_first.png" />
+    </a>
+    <a id="previous-page" aria-label="previous page" href="./?view=pages&page=2">
+      <img src="./page_nav_prev.png" />
+    </a>
+    <img id="page_nav_divider" src="./page_nav_divider.png" />
+    <a id="next-page" aria-label="next page" href="./?view=pages&page=3">
+      <img src="./page_nav_next.png" />
+    </a>
+    <a id="last-page" aria-label="last page" href="./?view=pages&page=${data.lastPage}">
+      <img src="./page_nav_last.png" />
+    </a>
+  </nav>
 </content>
 `;
   }
@@ -73,73 +111,10 @@ class Page extends HTMLElement {
 
 customElements.define("page-component", Page);
 
-/**
- * used to disable buttons as the page loads
- * @param {Boolean} disabled should the buttons be disabled
- */
-const setButtonsDisabled = (disabled) => {
-  const firstPage = document.getElementById("first-page");
-  if (firstPage) {
-    firstPage.disabled = disabled;
-  }
-  const previousPage = document.getElementById("previous-page");
-  if (previousPage) {
-    previousPage.disabled = disabled;
-  }
-  const nextPage = document.getElementById("next-page");
-  if (nextPage) {
-    nextPage.disabled = disabled;
-  }
-  const lastPage = document.getElementById("last-page");
-  if (lastPage) {
-    lastPage.disabled = disabled;
-  }
-};
-
-const handleFirstPageClick = () => {
-  setQueryValue("pages", 1);
-  setupPageView(1);
-};
-const handlePreviousPageClick = () => {
-  const newPage = Number(page) - 1;
-  setQueryValue("pages", newPage);
-  setupPageView(newPage);
-};
-const handleNextPageClick = () => {
-  const newPage = Number(page) + 1;
-  setQueryValue("pages", newPage);
-  setupPageView(newPage);
-};
-const handleLastPageClick = () => {
-  setQueryValue("pages", 1);
-};
-
-// remove event listeners to prevent memory leak
-const handlePageCleanup = () => {
-  if (document.getElementById("previousPage")) {
-    document
-      .getElementById("firstPage")
-      .removeEventListener("click", handleFirstPageClick);
-    document
-      .getElementById("previousPage")
-      .removeEventListener("click", handlePreviousPageClick);
-    document
-      .getElementById("nextPage")
-      .removeEventListener("click", handleNextPageClick);
-    document
-      .getElementById("lastPage")
-      .removeEventListener("click", handleLastPageClick);
-  }
-  const image = document.getElementById("page-image");
-  if (image) {
-    image.src = "";
-  }
-};
 const setupPageView = async (page) => {
   // make sure users can't interact with the buttons before the new values have been set
   d.getElementById("loading")?.classList.add("loading");
-  setButtonsDisabled(true);
-  handlePageCleanup();
+
   if (
     document.referrer &&
     new URL(document.referrer).searchParams.get("page")
@@ -149,28 +124,32 @@ const setupPageView = async (page) => {
   const response = await fetch(`./page_${page}.json`);
   if (response.status !== 200) console.warn("Page data can't be loaded");
   const pageData = await response.json();
-  setButtonsDisabled(false);
   document.getElementById("loading")?.classList.remove("loading");
   document.getElementById("page-image").src = pageData.image;
-  if (pageData.text) {
-    const descriptionElement = document.createElement("p");
-    descriptionElement.textContent = pageData.text;
+
+  if (pageData.description) {
+    console.log(pageData.description)
+    const descriptionElement = document.createElement("div");
+    descriptionElement.innerHTML = "<div>" + pageData.description + "</div>";
     descriptionElement.classList.add("description");
     document
-      .getElomentByTagName("page-image")[0]
+      .getElementById("page-nav")
       .insertAdjacentElement("afterend", descriptionElement);
   }
+
   document.getElementById("previous-page").href =
     `./?view=pages&page=${Number(page) - 1}`;
   document.getElementById("next-page").href =
     `./?view=pages&page=${Number(page) + 1}`;
-  document.getElementById("page-number").textContent = page;
-  console.log("Number(page) < 2", Number(page) < 2)
+  document.getElementById("image-next-page").href =
+    `./?view=pages&page=${Number(page) + 1}`;
+  // document.getElementById("page-number").textContent = page;
+
   if (Number(page) < 2) {
     document.getElementById("first-page").herf = "";
     document.getElementById("previous-page").href = "";
   }
-  console.log("Number(page) < data.lastPage", !(Number(page) < data.lastPage))
+
   if (!(Number(page) < data.lastPage)) {
     console.log(document.getElementById("next-page"))
     document.getElementById("next-page").href = "";
