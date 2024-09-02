@@ -18,17 +18,25 @@ class Page extends HTMLElement {
     text-decoration: underline;
   }
   content .description {
-    padding: 20px 0 8px 0;
+    padding: 20px 0 0 0;
     width: 100%;
     background-color: #91cff4;
   }
   content .description div {
-    border: black 1px solid;
+    box-sizing: border-box;
+    border: black 2px solid;
     width: 70%;
+    max-width: 900px;
     margin: 0 auto;
     background-color: #dbf2ff;
     padding: 4px 4px 8px 4px;
   }
+  @media all and (max-width: 890px) {
+    content .description div {
+      width: 95%;
+    }
+  }
+
   content .description p {
     padding-left: 16px;
   }
