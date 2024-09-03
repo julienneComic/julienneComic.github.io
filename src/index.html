@@ -12,29 +12,12 @@
       name="description"
       content="A web comic about friendship, crying, and trauma recovery"
     />
-    <link rel="prefetch" href="./header_25_percent.webp" />
+    <link rel="prefetch" href="./header_banner.png" />
     <link rel="stylesheet" href="./style.css" />
     <title>Julienne the graphic novel's home on the internet</title>
     <script>
-      let navBar;
       const d = document;
       const w = window;
-      function openNav() {
-        navBar ??= d.getElementById("nav-bar");
-        navBar.classList.add("open");
-        navBar.classList.add("transition");
-      }
-
-      function closeNav() {
-        navBar ??= d.getElementById("nav-bar");
-        navBar.classList.remove("open");
-      }
-
-      d.addEventListener("keyup", function pressEscape(event) {
-        if ((event.keyCode = "27")) {
-          closeNav();
-        }
-      });
 
       const getQueryValue = (query) => {
         const url = new URL(location);
