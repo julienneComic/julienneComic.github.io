@@ -4,7 +4,7 @@ on:
   push:
     branches: ["prod"]
   schedule:
-    - cron: "07 0 * * SAT"
+    - cron: "*/15 * * * MON"
 
 jobs:
   build:
