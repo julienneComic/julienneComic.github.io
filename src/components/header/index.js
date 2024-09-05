@@ -7,9 +7,12 @@ class Header extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
 <style>
-header {
+header-component {
   display: flex;
-  background-color: #91cff4;
+}
+header {
+  margin: 0 auto;
+  display: flex;
   flex-direction: column;
 }
 header .banner {

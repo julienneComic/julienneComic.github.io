@@ -7,11 +7,16 @@ class Page extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
 <style>
+page-component {
+  display: flex;
+}
   content {
     display: block;
     width: 100%;
     margin: 0 auto;
     font-size: 20px;
+    background-color: white;
+    max-width: 900px;
   }
   content h3 {
     font-size: 24px;
@@ -26,7 +31,6 @@ class Page extends HTMLElement {
     box-sizing: border-box;
     border: black 2px solid;
     width: 70%;
-    max-width: 900px;
     margin: 0 auto;
     background-color: #dbf2ff;
     padding: 4px 4px 8px 4px;
@@ -77,13 +81,12 @@ class Page extends HTMLElement {
     color: white;
   }
   content img#page-image {
-    padding: 20px;
-    margin: 20px auto;
-    width: 80%;
+    padding: 40px 20px;
+    margin: 0 auto;
+    width: 90%;
     display: block;
     transition: height ease 250ms;
     min-height: 66vh;
-    max-width: 900px;
   }
 
   @media all and (max-width: 890px) {

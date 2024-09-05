@@ -25,6 +25,9 @@ p {
 @viewport {
   width: device-width;
 }
+body {
+  background-color: #91cff4;
+}
 ul li {
   list-style-type: none;
 }

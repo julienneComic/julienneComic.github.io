@@ -51,10 +51,10 @@ footer {
 }
 .contact-info > div {
   background-color: #dbf2ff;
-  border: black 2px solid;
   box-sizing: border-box;
 }
 .email {
+  border: black 2px solid;
   padding: 8px;
 }
 .email form {
@@ -95,11 +95,15 @@ footer {
 }
 #links {
   padding: 8px;
+  background-color: transparent;
 }
 #links img {
   width: 24px;
   height: 24px;
   margin-right: 12px;
+}
+#copywrite {
+  color: white;
 }
 @media all and (max-width: 890px) {
   .contact-info {
@@ -114,9 +118,6 @@ footer {
   #links {
     display: flex;
     justify-content: space-around;
-  }
-  #links p {
-    display: none;
   }
   #links img {
     margin: 0;
@@ -149,20 +150,19 @@ footer {
       </div>
       <div id="links">
         <a href="https://www.instagram.com/sara_the_dragonfly/" >
-          <img src="./instagram_logo.png" />
-          <p>Insta</p>
+          <img src="./insta2.png" />
         </a>
         <a href="https://www.snutter.com/" >
-          <img src="" />
-          <p>Portfolio</p>
+          <img src="./portfolio_icon.png" />
         </a>
         <a href="https://www.thebioroboticist.com/" >
-          <img src="" />
-          <p>Biorobo</p>
+          <img src="./biorob_icon.png" />
         </a>
         <a href="https://www.linktr.ee/" >
-          <img src="./" />
-          <p>Linktr.ee</p>
+          <img src="./otherlinks_icon.png" />
+        </a>
+        <a href="https://www.patreon.com/snutter/" >
+          <img src="./patreon logo.webp" />
         </a>
       </div>
     </div>
