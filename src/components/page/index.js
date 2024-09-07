@@ -107,7 +107,7 @@ page-component {
     <a id="previous-page" aria-label="previous page" href="./?view=pages&page=2">
       <img src="./page_nav_prev.png" />
     </a>
-    <img id="page_nav_divider" src="./page_nav_divider.png" />
+    <a href="./?view=archive" ><img id="page_nav_divider" src="./page_nav_divider.png" /></a>
     <a id="next-page" aria-label="next page" href="./?view=pages&page=3">
       <img src="./page_nav_next.png" />
     </a>
