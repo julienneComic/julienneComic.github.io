@@ -7,45 +7,47 @@ class About extends HTMLElement {
     this.innerHTML = `
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Questrial&family=Syne:wght@400..800&display=swap');
-section {
-  margin: 28px auto;
+about-component {
+  margin: 0 auto;
+  padding: 20px 0;
   font-family: Questrial, sans-serif;
-  max-width: 981px;
+  max-width: 900px;
   display: block;
+  background-color: #dbf2ff;
 }
-section h3 {
+about-component h3 {
   font-family: Syne, sans-serif;
   font-size: 36px;
   margin-bottom: 28px;
   text-transform: uppercase;
 }
-section h4 {
+about-component h4 {
   margin: 0;
   font: normal normal normal 16px/1.4em questrial,sans-serif;
   font-size: 22px;
   font-weight: bold;
 }
-section div.container {
+about-component div.container {
   padding: 0 24px;
 }
-section p {
+about-component p {
   font: normal normal normal 20px/1.4em questrial,sans-serif;
 }
-section div.about-the-author {
+about-component div.about-the-author {
   display: flex;
   padding-bottom: 24px;
 }
-section img {
+about-component img#portrait {
   width: auto;
   height: 225px;
   padding-right: 24px;
 }
   @media all and (max-width: 700px) {
-  section div.about-the-author {
+  about-component div.about-the-author {
     flex-direction: column;
     margin: 0 auto;
   }
-  section img {
+  about-component img#portrait {
     max-width: 280px;
     margin: 0 auto;
     padding-bottom: 24px;
@@ -80,7 +82,7 @@ section img {
     <br />
     <h3>About the Author</h3>
     <div class="about-the-author">
-      <img src="/selfportrait2018.webp"/>
+      <img id="portrait" src="/selfportrait2018.webp"/>
       <div>
         <p><b>Sara</b> is a writer and illustrator passionate about the complicated journey of learning to
         love and liberate our whole selves. She lives in the PNW with her old lady tuxedo cat and little 

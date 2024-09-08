@@ -1,4 +1,7 @@
 const data = require("../page/data.json");
+const heightStyle = `height: 14vw;
+  max-height: 75px;
+`
 class Header extends HTMLElement {
   constructor() {
     super();
@@ -22,11 +25,11 @@ header .banner {
 }
 header nav {
   display: flex;
-  overflow: hidden;
   justify-content: center;
+  ${heightStyle}
 }
 nav img {
-  height: 75px;
+  ${heightStyle}
 }
 nav ul {
   display: flex;
@@ -37,15 +40,12 @@ nav li a {
   display: block;
   height: 0;
 }
-nav li {
-  height: 75px;
-}
 nav div {
   display: block;
   background-image: url("./menu_bar_left.png");
   width: 100%;
   background-position: right;
-  height: 75px;
+  ${heightStyle}
 }
 </style>
 <header class="header-container">

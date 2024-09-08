@@ -91,8 +91,8 @@ page-component {
 
   @media all and (max-width: 890px) {
     content img#page-image {
-      padding: 20px 5px;
-      width: 95%;
+      padding: 0;
+      width: 100%;
     }
   }
 </style>

@@ -29,19 +29,22 @@ footer {
   max-width: 900px;
   border: black 2px solid;
   box-sizing: border-box;
+  padding: 0;
 }
 #background-image {
   background-image: url("./footer_background.png");
   background-size: 100%;
   margin: 0 auto;
-  height: 55vw;
-  max-height: 500px;
+  height: 67vw;
+  max-height: 600px;
   max-width: 900px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 .contact-info {
+  flex-direction: column;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   margin: 20px auto 0 auto;
@@ -96,11 +99,18 @@ footer {
 #links {
   padding: 8px;
   background-color: transparent;
+  display: flex;
 }
 #links img {
   width: 24px;
   height: 24px;
   margin-right: 12px;
+}
+.sub-section {
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 #copywrite {
   color: white;
@@ -108,7 +118,6 @@ footer {
 @media all and (max-width: 890px) {
   .contact-info {
     width: 95%;
-    flex-direction: column;
     height: 100%;
     margin-top: 0;
   }
@@ -135,19 +144,11 @@ footer {
   <section id="background-image">
     <div class="contact-info">
       <div class="email">
-        <form method="post" action="https://sendfox.com/form/3qw75v/mn48ov" class="sendfox-form" id="mn48ov" data-async="true" data-recaptcha="true">
-            <label for="sendfox_form_email">Sign up for email notifications</label>
-          <div class="input-container">
-            <input type="email" id="sendfox_form_email" placeholder="Email" name="email" required />
-            <div style="position: absolute; left: -5000px;" aria-hidden="true">
-              <input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" />
-            </div>
-            <button type="submit">Subscribe!</button>
-          </div>
-          <!-- no botz please -->
-        </form>
-        <script src="https://cdn.sendfox.com/js/form.js" charset="utf-8"></script>
+        <div class="ml-embedded" data-form="tjWCy9"></div>
       </div>
+    </div>
+    <div class="sub-section" >
+      <p id="copywrite">Art and Story © Sara Nutter 2024</p>
       <div id="links">
         <a href="https://www.instagram.com/sara_the_dragonfly/" >
           <img src="./insta2.png" />
@@ -166,7 +167,6 @@ footer {
         </a>
       </div>
     </div>
-  <p id="copywrite">Art and Story © Sara Nutter 2024</p>
   </section>
 </footer>
 `;

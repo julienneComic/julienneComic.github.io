@@ -8,42 +8,43 @@ class Archive extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
 <style>
-section {
-  margin: 28px auto;
-  max-width: 981px;
+archive-component {
+  margin: 0 auto;
+  max-width: 900px;
   padding: 20px 0;
   display: block;
+  background-color: #dbf2ff;
 }
-section h2 {
+archive-component h2 {
   padding: 0px 20px 20px 20px;
   font-size: 36px;
 }
-section details {
-  background-color: #d0fffe;
+archive-component details {
+  background-color: #c3e3ff;
   margin: 16px;
   padding-bottom: 20px;
 }
-section summary {
+archive-component summary {
   display: block;
   cursor: pointer;
   padding: 20px 20px 0 20px;
 }
-section ul {
+archive-component ul {
   display: flex;
   flex-wrap: wrap;
 }
-section li {
+archive-component li {
   width: 80px;
   padding: 8px;
   margin: 8px;
   text-align: center;
-  background-color: #b1f9f9;
+  background-color: #a5d4fe;
   transition: background-color 250ms;
 }
-section li:hover {
+archive-component li:hover {
   background-color: white;
 }
-section h3 {
+archive-component h3 {
   font-size: 28px;
 }
 a:link    {color:#000;}  /* unvisited link  */
