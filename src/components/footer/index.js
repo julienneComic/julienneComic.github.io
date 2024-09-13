@@ -1,3 +1,5 @@
+// const setupDialog = require("./dialog.js");
+require("./dialog.js");
 class Footer extends HTMLElement {
   constructor() {
     super();
@@ -18,6 +20,9 @@ footer {
 .social-links ul {
   display: flex;
   justify-content: space-between;
+}
+.mobile-email-container {
+  display: none;
 }
 #patreon-banner {
   width: 100%;
@@ -56,24 +61,6 @@ footer {
   background-color: #dbf2ff;
   box-sizing: border-box;
 }
-.email {
-  border: black 2px solid;
-  padding: 8px;
-}
-.email form {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-.email label {
-  margin-bottom: 8px;
-}
-.email .input-container {
-  margin-top: 8px;
-  padding: 8px;
-  background-color: #91cff4;
-  border-radius: 24px;
-}
 .input-container input {
   background-color: inherit;
   border: none;
@@ -102,8 +89,8 @@ footer {
   display: flex;
 }
 #links img {
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
   margin-right: 12px;
 }
 .sub-section {
@@ -116,6 +103,19 @@ footer {
   color: white;
 }
 @media all and (max-width: 890px) {
+  .desktop-email-form {
+    display: none;
+  }
+  .mobile-email-container {
+    display: flex;
+    margin: 0 auto;
+    width: 95%;
+    max-width: 900px;
+    border: black 2px solid;
+    box-sizing: border-box;
+    padding: 0;
+    background-color: #dbf2ff;
+  }
   .contact-info {
     width: 95%;
     height: 100%;
@@ -124,9 +124,13 @@ footer {
   #patreon-banner img {
     width: 95%;
   }
+  .sub-section {
+    flex-direction: column-reverse;
+  }
   #links {
     display: flex;
     justify-content: space-around;
+    width: 100%;
   }
   #links img {
     margin: 0;
@@ -142,11 +146,8 @@ footer {
 <footer>
   <section id="patreon-banner"><img src="./patreon_banner.png" /></section>
   <section id="background-image">
-    <div class="contact-info">
-      <div class="email">
-        <div class="ml-embedded" data-form="tjWCy9"></div>
-      </div>
-    </div>
+    <dialog-component class="mobile-email-container"></dialog-component>
+    <div class="ml-embedded desktop-email-form" data-form="tjWCy9"></div>
     <div class="sub-section" >
       <p id="copywrite">Art and Story © Sara Nutter 2024</p>
       <div id="links">
@@ -159,7 +160,7 @@ footer {
         <a href="https://www.thebioroboticist.com/" >
           <img src="./biorob_icon.png" />
         </a>
-        <a href="https://www.linktr.ee/" >
+        <a href="https://www.linktr.ee/snutter/" >
           <img src="./otherlinks_icon.png" />
         </a>
         <a href="https://www.patreon.com/snutter/" >
@@ -180,6 +181,18 @@ const setupFooter = () => {
   window.addEventListener("load", () => {
     document.getElementById("copywrite").innerText =
       `Art and Story © Sara Nutter ${new Date().getFullYear()}`;
+    // const dialogEl = document.getElementById("email-dialog")
+    // const openButton = document.getElementById("open-dialog-button")
+    // const closeButton = document.getElementById("close-dialog-button")
+    // console.log('got elements') 
+    // openButton?.addEventListener("click", () => {
+    //   console.log('clicked open button')
+    //   dialogEl.showModal();
+    // })
+    //
+    // closeButton?.addEventListener("click", () => {
+    //   dialogEl.close();
+    // })
   });
 };
 setupFooter();
