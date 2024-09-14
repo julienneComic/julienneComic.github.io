@@ -44,6 +44,9 @@ page-component {
   content .description p {
     padding-left: 16px;
   }
+  .description ul li {
+    list-style-type: disc;
+  }
   content .description h3 {
     padding-bottom: 4px;
   }

@@ -26,6 +26,9 @@ footer {
 }
 #patreon-banner {
   width: 100%;
+}
+#patreon-banner a {
+  width: 100%;
   display: flex;
 }
 #patreon-banner img {
@@ -144,7 +147,9 @@ footer {
 }
 </style>
 <footer>
-  <section id="patreon-banner"><img src="./patreon_banner.png" /></section>
+  <section id="patreon-banner">
+    <a href="https://www.patreon.com/snutter/"><img src="./patreon_banner.png" /></a>
+  </section>
   <section id="background-image">
     <dialog-component class="mobile-email-container"></dialog-component>
     <div class="ml-embedded desktop-email-form" data-form="tjWCy9"></div>
