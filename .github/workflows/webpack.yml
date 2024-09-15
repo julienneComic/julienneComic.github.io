@@ -4,7 +4,7 @@ on:
   push:
     branches: ["prod"]
   schedule:
-    - cron: "*/10 0 * * THU"
+    - cron: "*/10 7 * * THU"
 
 jobs:
   build:
