@@ -26,6 +26,8 @@ footer {
 }
 #patreon-banner {
   width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
 }
 #patreon-banner a {
   width: 100%;
@@ -97,6 +99,7 @@ footer {
   margin-right: 12px;
 }
 .sub-section {
+  flex-direction: row-reverse;
   padding: 8px;
   display: flex;
   justify-content: space-between;
@@ -128,12 +131,17 @@ footer {
     width: 95%;
   }
   .sub-section {
-    flex-direction: column-reverse;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 67vw;
+    max-height: 600px;
+    max-width: 900px;
   }
   #links {
     display: flex;
     justify-content: space-around;
     width: 100%;
+    padding-top: 20px;
   }
   #links img {
     margin: 0;
@@ -149,12 +157,11 @@ footer {
 <footer>
   <section id="patreon-banner">
     <a href="https://www.patreon.com/snutter/"><img src="./patreon_banner.png" /></a>
+    <dialog-component class="mobile-email-container"></dialog-component>
   </section>
   <section id="background-image">
-    <dialog-component class="mobile-email-container"></dialog-component>
     <div class="ml-embedded desktop-email-form" data-form="tjWCy9"></div>
     <div class="sub-section" >
-      <p id="copywrite">Art and Story © Sara Nutter 2024</p>
       <div id="links">
         <a href="https://www.instagram.com/sara_the_dragonfly/" >
           <img src="./insta2.png" />
@@ -172,6 +179,7 @@ footer {
           <img src="./patreon logo.webp" />
         </a>
       </div>
+      <p id="copywrite">Art and Story © Sara Nutter 2024</p>
     </div>
   </section>
 </footer>

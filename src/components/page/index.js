@@ -18,10 +18,6 @@ page-component {
     background-color: white;
     max-width: 900px;
   }
-  content h3 {
-    font-size: 24px;
-    text-decoration: underline;
-  }
   content .description {
     padding: 20px 0 0 0;
     width: 100%;
@@ -33,7 +29,7 @@ page-component {
     width: 70%;
     margin: 0 auto;
     background-color: #dbf2ff;
-    padding: 4px 4px 8px 4px;
+    padding: 20px;
   }
   @media all and (max-width: 890px) {
     content .description div {
@@ -42,13 +38,15 @@ page-component {
   }
 
   content .description p {
-    padding-left: 16px;
+    font-size: 18px;
   }
   .description ul li {
     list-style-type: disc;
   }
   content .description h3 {
-    padding-bottom: 4px;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: Poppins;
   }
   content nav {
     display: flex;
@@ -95,6 +93,7 @@ page-component {
   @media all and (max-width: 890px) {
     content img#page-image {
       padding: 0;
+      padding-bottom: 40px;
       width: 100%;
     }
   }
