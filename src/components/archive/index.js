@@ -32,6 +32,9 @@ archive-component summary {
 archive-component ul {
   display: flex;
   flex-wrap: wrap;
+  margin: 0;
+  padding: 20px;
+  justify-content: space-around;
 }
 archive-component li {
   width: 80px;
