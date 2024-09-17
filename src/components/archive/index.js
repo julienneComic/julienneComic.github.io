@@ -16,7 +16,7 @@ archive-component {
   background-color: #dbf2ff;
 }
 archive-component h2 {
-  padding: 0px 20px 20px 20px;
+  padding: 0px 20px 4px 20px;
   font-size: 36px;
 }
 archive-component details {
@@ -53,7 +53,7 @@ a:hover   {color:#000;}  /* mouse over link */
 a:active  {color:#000;} 
 </style>
 <section id="content">
-  <h2>Archive</h2>
+  <h2>Volume 1</h2>
 </section>
 `;
   }
@@ -82,12 +82,18 @@ const setupArchivePage = async () => {
   const content = document.getElementById("content");
 
   let postNumber = 1;
-
+  let chapterOffset = 0;
   // loop through all the chapters create a details summary group for each
   for (let i = 0; i < pageData.chapters.length; i += 1) {
+    if (i === 5) {
+      content.insertAdjacentHTML("beforeend", 
+"<h2>Volume 2</h2>"
+      );
+      chapterOffset = 5;
+    }
     const chapterNumber = i + 1;
+    const visibileChapterNumber = chapterNumber - chapterOffset;
     const chapterData = pageData.chapters[i];
-
     content.insertAdjacentHTML(
       "beforeend",
       `
@@ -97,7 +103,7 @@ const setupArchivePage = async () => {
     const [summary, pageChildren] = document
       .getElementById(`chapter-${chapterNumber}`)
       .getElementsByTagName("details")[0].children;
-    summary.children[0].innerText = `Chapter ${chapterNumber}: ${chapterData.title}`;
+    summary.children[0].innerText = `Chapter ${visibileChapterNumber}: ${chapterData.title}`;
 
     // loop through all the chapterNumbers
     for (const pageNumber of chapterData.pages) {

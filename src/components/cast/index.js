@@ -19,6 +19,7 @@ cast-component {
 }
 cast-component section > div {
   display: flex;
+  box-sizing: border-box;
   flex-wrap: wrap;
   width: 100%;
   margin: 0 auto;
@@ -36,7 +37,6 @@ cast-component img {
 }
 cast-component h2 {
   font-size: 36px;
-  width: 100%;
   margin-bottom: 20px;
   padding-left: 40px;
 }

@@ -46,11 +46,13 @@ footer {
   background-size: 100%;
   margin: 0 auto;
   height: 67vw;
+  padding-top: 20px;
   max-height: 600px;
   max-width: 900px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-sizing: border-box;
 }
 .contact-info {
   flex-direction: column;

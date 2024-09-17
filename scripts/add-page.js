@@ -7,7 +7,7 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
-const componentsPath = path.join(__dirname, "..", "src", "components");
+const componentsPath = path.join(__dirname, '..', 'src', 'components');
 
 const creationWizard = async () => {
   // ask the user to select an image with the system's file explorer
@@ -85,7 +85,7 @@ end'`;
   // use new image location and archive data to create page json file
   try {
     const newestChapter = archiveData.chapters[archiveData.chapters.length - 1];
-    const newFileDirectoryName = __dirname, "..", "pages", `page_${newPageImageNumber}.json`
+    const newFileDirectoryName = join(__dirname, "..", "pages", `page_${newPageImageNumber}.json`);
 
     await fs.writeFile(
       path.join(newFileDirectoryName),
