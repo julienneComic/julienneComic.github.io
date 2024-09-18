@@ -31,6 +31,15 @@ page-component {
     background-color: #dbf2ff;
     padding: 20px;
   }
+  content .description a {
+    color: black;
+    background-color: inherit;
+    font-size: 18px;
+    font-style: italic;
+  }
+  content .disabled {
+    cursor: default;
+  }
   @media all and (max-width: 890px) {
     content .description div {
       width: 95%;
@@ -166,7 +175,11 @@ const setupPageView = async (page) => {
   if (!(Number(page) < data.lastPage)) {
     console.log(document.getElementById("next-page"))
     document.getElementById("next-page").href = "";
+    document.getElementById("next-page").classList.add("disabled");
     document.getElementById("last-page").href = "";
+    document.getElementById("last-page").classList.add("disabled");
+    document.getElementById("image-next-page").href = "";
+    document.getElementById("image-next-page").classList.add("disabled");
   }
 };
 
