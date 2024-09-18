@@ -185,8 +185,8 @@ const setupPageView = async (page) => {
 
 let page = getQueryValue("page");
 if (!page) {
-  page = 1;
-  setQueryValue("page", 1);
+  page = data.lastPage;
+  setQueryValue("page", page);
 }
 setupPageView(page);
 console.log("page script finished");
