@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-
+git stash
+git pull prod main --rebase
+git stash pop
 git add .
 git diff --name-only --cached
 echo
@@ -23,19 +25,15 @@ Please remove changes to files you don't want pushed"
 fi
 echo "
 Where do you want to push these changes?"
-select yn in "Test" "Prod" "Both"; do
+select yn in "Queue" "Prod"; do
   case $yn in
   Prod)
     git push prod HEAD
+    git push prod prod:main
     break
     ;;
-  Test)
-    git push origin HEAD
-    break
-    ;;
-  Both)
-    git push origin HEAD
-    git push prod HEAD
+  Queue)
+    git push prod prod:main
     break
     ;;
   esac
