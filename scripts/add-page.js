@@ -12,21 +12,21 @@ const componentsPath = path.join(__dirname, '..', 'src', 'components');
 const creationWizard = async () => {
   // ask the user to select an image with the system's file explorer
   let providedImagePath = '';
-  try {
-    const script = `osascript -e 'tell application (path to frontmost application as text)
-set myFile to choose file with prompt "Choose new Page image file" of type {["png", "webp", "jpg", "jpeg", "png"]}
-POSIX path of myFile
-end'`;
+try {
+  const script = `osascript -e 'tell application (path to frontmost application as text)
+ set myFile to choose file with prompt "Choose new Page image file" of type {["png", "webp", "jpg", "jpeg", "png"]}
+ POSIX path of myFile
+ end'`;
 
-    const util = require("util")
-    const exec = util.promisify(require("child_process").exec)
-    const { stdout, stderr } = await exec(script)
-    if (stderr !== "") throw new Error(stderr)
-    providedImagePath = stdout.slice(0, stdout.length - 1);
-  } catch (error) {
-    console.log("\nerror waiting for the image to be added");
-    throw error;
-  }
+  const util = require("util")
+  const exec = util.promisify(require("child_process").exec)
+  const { stdout, stderr } = await exec(script)
+  if (stderr !== "") throw new Error(stderr)
+  providedImagePath = stdout.slice(0, stdout.length - 1);
+} catch (error) {
+  console.log("\nerror waiting for the image to be added");
+  throw error;
+}
   console.log(providedImagePath, 'Has been selected')
 
   const pageMetadataPath = path.join(componentsPath, "page", "data.json");
@@ -85,7 +85,7 @@ end'`;
   // use new image location and archive data to create page json file
   try {
     const newestChapter = archiveData.chapters[archiveData.chapters.length - 1];
-    const newFileDirectoryName = join(__dirname, "..", "pages", `page_${newPageImageNumber}.json`);
+    const newFileDirectoryName = path.join(__dirname, "..", "pages", `page_${newPageImageNumber}.json`);
 
     await fs.writeFile(
       path.join(newFileDirectoryName),
@@ -97,7 +97,7 @@ end'`;
 }`,
     );
 
-    consoel.lgo("If you want to add a description edit the json file at this path", newFileDirectoryName);
+    console.log("If you want to add a description edit the json file at this path", newFileDirectoryName);
 
   } catch (error) {
     console.log("Error generating page file", error);
