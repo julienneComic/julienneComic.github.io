@@ -180,6 +180,9 @@ footer {
         <a href="https://www.patreon.com/snutter/" >
           <img src="./patreon logo.webp" />
         </a>
+        <a href="https://www.juliennecomic.com/rss.xml" >
+          <img src="./rss_black.png" />
+        </a>
       </div>
       <p id="copywrite">Art and Story © Sara Nutter 2024</p>
     </div>

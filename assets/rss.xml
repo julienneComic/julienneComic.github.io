@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Julienne A Graphic Novel</title>
+        <link>https://juliennecomic.com</link>
+        <description>undefined</description>
+        <lastBuildDate>Wed, 15 Jan 2025 01:58:11 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en</language>
+        <copyright>Copyright © 2025 Sara Nutter</copyright>
+        <item>
+            <title><![CDATA[Chapter 7: Page 4]]></title>
+            <link>https://www.juliennecomic.com?view=pages&amp;page=151</link>
+            <guid>https://www.juliennecomic.com?view=pages&amp;page=151</guid>
+            <enclosure url="https://www.juliennecomic.com/page_151.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Chapter 7: Page 5]]></title>
+            <link>https://www.juliennecomic.com?view=pages&amp;page=152</link>
+            <guid>https://www.juliennecomic.com?view=pages&amp;page=152</guid>
+            <enclosure url="https://www.juliennecomic.com/page_152.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Chapter 7: Page 6]]></title>
+            <link>https://www.juliennecomic.com?view=pages&amp;page=153</link>
+            <guid>https://www.juliennecomic.com?view=pages&amp;page=153</guid>
+            <description><![CDATA[Short update this week. I'm hoping to take some time off pretty soon, but I need to catch up on my page buffer. I burn through it so quickly! ;A;]]></description>
+            <enclosure url="https://www.juliennecomic.com/page_153.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Chapter 7: Page 7]]></title>
+            <link>https://www.juliennecomic.com?view=pages&amp;page=154</link>
+            <guid>https://www.juliennecomic.com?view=pages&amp;page=154</guid>
+            <enclosure url="https://www.juliennecomic.com/page_154.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Chapter 7: Page 8]]></title>
+            <link>https://www.juliennecomic.com?view=pages&amp;page=155</link>
+            <guid>https://www.juliennecomic.com?view=pages&amp;page=155</guid>
+            <description><![CDATA[Hydrophin are not a species you want to play a waiting game with, but she's got provisions...]]></description>
+            <enclosure url="https://www.juliennecomic.com/page_155.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Chapter 7: Page 9]]></title>
+            <link>https://www.juliennecomic.com?view=pages&amp;page=156</link>
+            <guid>https://www.juliennecomic.com?view=pages&amp;page=156</guid>
+            <enclosure url="https://www.juliennecomic.com/page_156.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Chapter 7: Page 10]]></title>
+            <link>https://www.juliennecomic.com?view=pages&amp;page=157</link>
+            <guid>https://www.juliennecomic.com?view=pages&amp;page=157</guid>
+            <enclosure url="https://www.juliennecomic.com/page_157.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Chapter 7: Page 11]]></title>
+            <link>https://www.juliennecomic.com?view=pages&amp;page=158</link>
+            <guid>https://www.juliennecomic.com?view=pages&amp;page=158</guid>
+            <enclosure url="https://www.juliennecomic.com/page_158.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Chapter 7: Page 12]]></title>
+            <link>https://www.juliennecomic.com?view=pages&amp;page=159</link>
+            <guid>https://www.juliennecomic.com?view=pages&amp;page=159</guid>
+            <enclosure url="https://www.juliennecomic.com/page_159.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Chapter 7: Page 13]]></title>
+            <link>https://www.juliennecomic.com?view=pages&amp;page=160</link>
+            <guid>https://www.juliennecomic.com?view=pages&amp;page=160</guid>
+            <enclosure url="https://www.juliennecomic.com/page_160.png" length="0" type="image/png"/>
+        </item>
+    </channel>
+</rss>
