@@ -18,7 +18,7 @@ async function generateRssPostsFeed() {
     },
   });
   console.log(pageComponentData);
-  for (let i = 10; i > 0; i--) {
+  for (let i = 10; i >= 0; i--) {
     const pageToAdd = pageComponentData.lastPage - i;
     console.log(pageToAdd);
     const pageData = require(`../pages/page_${pageToAdd}.json`);

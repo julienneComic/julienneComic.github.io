@@ -4,17 +4,11 @@
         <title>Julienne A Graphic Novel</title>
         <link>https://juliennecomic.com</link>
         <description>undefined</description>
-        <lastBuildDate>Wed, 15 Jan 2025 01:58:11 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 07 Feb 2025 22:13:23 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <copyright>Copyright © 2025 Sara Nutter</copyright>
-        <item>
-            <title><![CDATA[Chapter 7: Page 4]]></title>
-            <link>https://www.juliennecomic.com?view=pages&amp;page=151</link>
-            <guid>https://www.juliennecomic.com?view=pages&amp;page=151</guid>
-            <enclosure url="https://www.juliennecomic.com/page_151.png" length="0" type="image/png"/>
-        </item>
         <item>
             <title><![CDATA[Chapter 7: Page 5]]></title>
             <link>https://www.juliennecomic.com?view=pages&amp;page=152</link>
@@ -70,6 +64,20 @@
             <link>https://www.juliennecomic.com?view=pages&amp;page=160</link>
             <guid>https://www.juliennecomic.com?view=pages&amp;page=160</guid>
             <enclosure url="https://www.juliennecomic.com/page_160.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Chapter 7: Page 14]]></title>
+            <link>https://www.juliennecomic.com?view=pages&amp;page=161</link>
+            <guid>https://www.juliennecomic.com?view=pages&amp;page=161</guid>
+            <description><![CDATA[ANNOUNCEMENT! This is the last update for 2024. I'm taking the whole month of January off work and general existing on the internet for a sorely overdue recharge, during which I plan to let the granny hobbies take me.<br>In the meantime, I'm scheduling some extras over on Patreon (patreon.com/snutter) across all tiers to go up in January.<br>The comic will resume Friday, February 7th!<br>I hope you all have a lovely holiday season. Thank you so much for your kind and enthusiastic support. I love getting to make this comic for you all.<br>See you in 2025!]]></description>
+            <enclosure url="https://www.juliennecomic.com/page_161.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Chapter 7: Page 15]]></title>
+            <link>https://www.juliennecomic.com?view=pages&amp;page=162</link>
+            <guid>https://www.juliennecomic.com?view=pages&amp;page=162</guid>
+            <description><![CDATA[We're back! Slowly firing up the comics-making machinery again. My time off was restful and insightful as I'd hoped, and I'm excited to get back to drawing. I have some exciting things in the works for this year!]]></description>
+            <enclosure url="https://www.juliennecomic.com/page_162.png" length="0" type="image/png"/>
         </item>
     </channel>
 </rss>
