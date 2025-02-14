@@ -8,26 +8,24 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 const componentsPath = path.join(__dirname, '..', 'src', 'components');
-const { generateRssPostsFeed } = require('../src/rss.js');
 
 const creationWizard = async () => {
   // ask the user to select an image with the system's file explorer
-  let providedImagePath = '/home/pear/Downloads/Osprey.jpg';
-// try {
-//   const script = `osascript -e 'tell application (path to frontmost application as text)
-//  set myFile to choose file with prompt "Choose new Page image file" of type {["png", "webp", "jpg", "jpeg", "png"]}
-//  POSIX path of myFile
-//  end'`;
-//
-//   const util = require("util")
-//   const exec = util.promisify(require("child_process").exec)
-//   const { stdout, stderr } = await exec(script)
-//   if (stderr !== "") throw new Error(stderr)
-//   providedImagePath = stdout.slice(0, stdout.length - 1);
-// } catch (error) {
-//   console.log("\nerror waiting for the image to be added");
-//   throw error;
-// }
+try {
+  const script = `osascript -e 'tell application (path to frontmost application as text)
+ set myFile to choose file with prompt "Choose new Page image file" of type {["png", "webp", "jpg", "jpeg", "png"]}
+ POSIX path of myFile
+ end'`;
+
+  const util = require("util")
+  const exec = util.promisify(require("child_process").exec)
+  const { stdout, stderr } = await exec(script)
+  if (stderr !== "") throw new Error(stderr)
+  providedImagePath = stdout.slice(0, stdout.length - 1);
+} catch (error) {
+  console.log("\nerror waiting for the image to be added");
+  throw error;
+}
   console.log(providedImagePath, 'Has been selected')
 
   const pageMetadataPath = path.join(componentsPath, "page", "data.json");
