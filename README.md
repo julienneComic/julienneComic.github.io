@@ -19,3 +19,7 @@ There are two scripts:
 - `yarn add-character`
 
 Follow the instructions the scripts provide
+
+## Data
+
+Data for the different views is stored in their respective component folders.
