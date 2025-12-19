@@ -33,12 +33,15 @@ try {
 
   const newPageImageNumber = pageMetadata.lastPage + 1;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
   const fileExtensionDivider = providedImagePath.lastIndexOf(".");
   const imageFileExtension = providedImagePath.slice(fileExtensionDivider, providedImagePath.length);
   const newImageFileName = "page_" + newPageImageNumber + imageFileExtension;
   
 =======
+=======
+>>>>>>> Stashed changes
   const imageFileArray = providedImagePath.split(".");
   const imageFileExtension = imageFileArray[imageFileArray.length - 1];
   const newImageFileName =
