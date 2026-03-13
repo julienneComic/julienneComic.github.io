@@ -32,11 +32,18 @@ try {
   const pageMetadata = require(pageMetadataPath);
 
   const newPageImageNumber = pageMetadata.lastPage + 1;
+<<<<<<< Updated upstream
 
   const fileExtensionDivider = providedImagePath.lastIndexOf(".");
   const imageFileExtension = providedImagePath.slice(fileExtensionDivider, providedImagePath.length);
   const newImageFileName = "page_" + newPageImageNumber + imageFileExtension;
   
+=======
+  const imageFileArray = providedImagePath.split(".");
+  const imageFileExtension = imageFileArray[imageFileArray.length - 1];
+  const newImageFileName =
+    "page_" + newPageImageNumber + "." + imageFileExtension;
+>>>>>>> Stashed changes
   const newImagePath = path.join(__dirname, "..", "assets", newImageFileName);
 
   const archiveDataPath = path.join(componentsPath, "archive", "data.json");
