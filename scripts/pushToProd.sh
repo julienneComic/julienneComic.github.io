@@ -1,7 +1,20 @@
 #!/usr/bin/env bash
-git stash
+set -euo pipefail
+
+# Rebase the current branch onto prod/main, then push *this* branch — not a
+# different local branch (e.g. local `prod`), which caused stale pushes and
+# merge/rebase errors.
+
+if [ -n "$(git status --porcelain)" ]; then
+  git stash push -m "pushToProd pre-pull"
+  stashed=1
+else
+  stashed=0
+fi
 git pull prod main --rebase
-git stash pop
+if [ "${stashed:-0}" -eq 1 ]; then
+  git stash pop
+fi
 git add .
 git diff --name-only --cached
 echo
@@ -28,12 +41,13 @@ Where do you want to push these changes?"
 select yn in "Queue" "Prod"; do
   case $yn in
   Prod)
-    git push prod HEAD
-    git push prod prod:main
+    # Remote `prod` branch triggers GitHub Actions deploy (see .github/workflows).
+    git push prod HEAD:prod
     break
     ;;
   Queue)
-    git push prod prod:main
+    # Update remote `main` without updating the deploy branch.
+    git push prod HEAD:main
     break
     ;;
   esac
