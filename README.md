@@ -22,4 +22,8 @@ Follow the instructions the scripts provide
 
 ## Data
 
+<<<<<<< Updated upstream
 Data for the different views is stored in their respective component folders.
+=======
+Data for the different views is stored in their respective component folders.
+>>>>>>> Stashed changes
