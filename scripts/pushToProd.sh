@@ -43,6 +43,7 @@ select yn in "Queue" "Prod"; do
   Prod)
     # Remote `prod` branch triggers GitHub Actions deploy (see .github/workflows).
     git push prod HEAD:prod
+    git push prod prod:main
     break
     ;;
   Queue)
