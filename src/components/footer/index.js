@@ -1,5 +1,5 @@
 // const setupDialog = require("./dialog.js");
-require("./dialog.js");
+// require("./dialog.js");
 class Footer extends HTMLElement {
   constructor() {
     super();
@@ -111,9 +111,6 @@ footer {
   color: white;
 }
 @media all and (max-width: 890px) {
-  .desktop-email-form {
-    display: none;
-  }
   .mobile-email-container {
     display: flex;
     margin: 0 auto;
@@ -148,8 +145,9 @@ footer {
   #links img {
     margin: 0;
   }
-  .email {
+  #desktop-email-form {
     width: 100%;
+    display: flex;
   }
   .input-container {
     display: flex;
@@ -159,10 +157,9 @@ footer {
 <footer>
   <section id="patreon-banner">
     <a href="https://www.patreon.com/snutter/"><img src="./patreon_banner.png" /></a>
-    <dialog-component class="mobile-email-container"></dialog-component>
   </section>
   <section id="background-image">
-    <div class="ml-embedded desktop-email-form" data-form="tjWCy9"></div>
+    <div class="desktop-email-form" style="margin: 0 auto"><script async src="https://eomail5.com/form/3f2e8038-44f7-11f1-8176-655934af1911.js" data-form="3f2e8038-44f7-11f1-8176-655934af1911"></script></div>
     <div class="sub-section" >
       <div id="links">
         <a href="https://www.instagram.com/sara_the_dragonfly/" >

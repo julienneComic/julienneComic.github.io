@@ -68,8 +68,8 @@ class Dialog extends HTMLElement {
   <p>Receive an email when the comic updates!</p>
 </button>
 <dialog id="email-dialog">
-  <div class="ml-embedded" data-form="tjWCy9"></div>
-  <div style="width: 100%; box-sizing: border-box; padding: 0 20px 20px 20px;">
+    <div style="margin: 0 auto"><script async src="https://eomail5.com/form/3f2e8038-44f7-11f1-8176-655934af1911.js" data-form="3f2e8038-44f7-11f1-8176-655934af1911"></script></div>
+    <div style="width: 100%; box-sizing: border-box; padding: 0 20px 20px 20px;">
     <button id="close-dialog-button" aria-label="close dialog button">Close</button>
   </div>
 </dialog>
