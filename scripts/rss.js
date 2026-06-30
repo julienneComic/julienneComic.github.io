@@ -14,7 +14,7 @@ async function generateRssPostsFeed() {
       link: "http://saranutter.wordpress.com/",
     },
     feedLinks: {
-      rss2: `https://juliennecomic.com/feed.xml`,
+      rss2: `https://www.juliennecomic.com/rss.xml`,
     },
   });
   console.log(pageComponentData);

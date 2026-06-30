@@ -2,9 +2,9 @@
 
 pkgs.mkShell {
   buildInputs = with pkgs; [
-    nodejs_20
+    nodejs_26
     yarn
-    nodePackages.prettier
+    prettier
   ];
 
   shellHook = ''
