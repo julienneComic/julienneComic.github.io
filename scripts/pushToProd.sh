@@ -4,7 +4,7 @@ set -euo pipefail
 # Rebase the current branch onto prod/main, then push *this* branch — not a
 # different local branch (e.g. local `prod`), which caused stale pushes and
 # merge/rebase errors.
-
+echo "started"
 if [ -n "$(git status --porcelain)" ]; then
   git stash push -m "pushToProd pre-pull"
   stashed=1
